@@ -1,0 +1,51 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<sap.ui.core:View xmlns="sap.m" xmlns:sap.ui.core="sap.ui.core">
+	<Table id="oOrderItems" inset="true"
+		showNoData="false" growing="true" growingThreshold="30" growingScrollToLoad="true" items="{LocalOrderItems>/}">
+		<items>
+			<ColumnListItem unread="true" counter="0">
+				<cells>
+					<ObjectIdentifier title="{ parts:[{path: 'LocalOrderItems>ItemNumber'}, {path:'LocalOrderItems>ProductName'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.formatItemNumberProductName'}"
+						badgeNotes="false" badgePeople="false" badgeAttachments="false"></ObjectIdentifier>
+					<Label text="{parts:[{path:'LocalOrderItems>Quantity'}, {path:'LocalOrderItems>UnitofMeasureTxt'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.formatQuantityUnitofMeasure'}"></Label>
+
+					<ObjectNumber number="{path: 'LocalOrderItems>FinalPrice', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"
+						unit="{LocalOrderItems>Currency}"></ObjectNumber>
+					<ObjectNumber number="{path: 'LocalOrderItems>NetAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"
+						unit="{LocalOrderItems>Currency}"></ObjectNumber>
+						<!-- Extension point for table column value let you add new field for a column in table -->
+					<sap.ui.core:ExtensionPoint name="extSOItemTableColumnValue" />
+				</cells>
+			</ColumnListItem>
+		</items>
+		<columns>
+			<Column hAlign="Left" minScreenWidth="tablet" demandPopin="true">
+				<header>
+					<Label text="{i18n>SO_ITM}" textAlign="Left" width="100%"></Label>
+				</header>
+			</Column>
+			<Column hAlign="Right" minScreenWidth="tablet" demandPopin="true">
+				<header>
+					<Label text="{i18n>SO_ITM_QTY}" textAlign="Right" width="100%"></Label>
+				</header>
+			</Column>
+			<Column hAlign="Right" minScreenWidth="tablet" demandPopin="true">
+				<header>
+					<Label text="{i18n>SO_ITM_YOUR_PRICE}" textAlign="Right"
+						width="100%"></Label>
+				</header>
+			</Column>
+			<Column hAlign="Right" minScreenWidth="tablet" demandPopin="true">
+				<header>
+					<Label text="{i18n>SUB_TOTAL}" textAlign="Right" width="100%"></Label>
+				</header>
+			</Column>
+			<!-- Extension point for table column header let you add new column in table-->
+			<sap.ui.core:ExtensionPoint name="extSOItemTableColumnHeader" />
+		</columns>
+	</Table>
+</sap.ui.core:View>

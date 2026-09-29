@@ -1,0 +1,11 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns="sap.m" controllerName="cus.sd.zsalesorder.create.Main" displayBlock="true" height="100%">                          
+	<NavContainer id="fioriContent" showHeader="false">                                                              
+	</NavContainer>   
+	
+</core:View>

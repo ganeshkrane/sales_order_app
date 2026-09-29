@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+	<edmx:DataServices m:DataServiceVersion="1.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+		<Schema Namespace="EPMDemo" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="Product" m:HasStream="false">
+				<Key>
+					<PropertyRef Name="ProductID"/>
+				</Key>
+				<Property FixedLength="true" MaxLength="10" Name="ProductID" Nullable="false" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="255" Name="ImageUrl" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="false" Name="MimeType" Nullable="true" Type="Edm.String"/>
+				<Property Name="Price" Nullable="false" Type="EPMDemo.Price"/>
+				<Property FixedLength="true" MaxLength="255" Name="Name" Nullable="false" Type="Edm.String" m:FC_TargetPath="SyndicationTitle"/>
+				<Property FixedLength="true" MaxLength="255" Name="Description" Nullable="true" Type="Edm.String"/>
+				<Property Name="CreatedAt" Nullable="true" Type="Edm.DateTime"/>
+				<Property ConcurrencyMode="Fixed" Name="ChangedAt" Nullable="true" Type="Edm.DateTime" m:FC_TargetPath="SyndicationUpdated"/>
+				<Property FixedLength="true" MaxLength="81" Name="CreatedByName" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="81" Name="ChangedByName" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="40" Name="Category" Nullable="false" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="10" Name="SupplierID" Nullable="false" Type="Edm.String" Unicode="false"/>
+				<Property FixedLength="true" MaxLength="80" Name="SupplierName" Nullable="true" Type="Edm.String" Unicode="false"/>
+				<NavigationProperty FromRole="ProductAR" Name="Supplier" Relationship="EPMDemo.Product_Supplier" ToRole="SupplierAR"/>
+			</EntityType>
+			<EntityType Name="Supplier" m:HasStream="false">
+				<Key>
+					<PropertyRef Name="SupplierID"/>
+				</Key>
+				<Property FixedLength="true" MaxLength="10" Name="SupplierID" Nullable="false" Type="Edm.String" Unicode="false"/>
+				<Property FixedLength="true" MaxLength="80" Name="Name" Nullable="false" Type="Edm.String" Unicode="false" m:FC_TargetPath="SyndicationTitle"/>
+				<Property Name="Address" Nullable="false" Type="EPMDemo.Address" Unicode="false"/>
+				<Property Name="CreatedAt" Nullable="true" Type="Edm.DateTime"/>
+				<Property Name="ChangedAt" Nullable="true" Type="Edm.DateTime" m:FC_TargetPath="SyndicationUpdated"/>
+				<Property FixedLength="true" MaxLength="81" Name="CreatedByName" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="81" Name="ChangedByName" Nullable="true" Type="Edm.String"/>
+				<NavigationProperty FromRole="SupplierAR" Name="Products" Relationship="EPMDemo.Product_Supplier" ToRole="ProductAR"/>
+			</EntityType>
+			<EntityType Name="PurchaseOrder" m:HasStream="false">
+				<Key>
+					<PropertyRef Name="PurchaseOrderID"/>
+				</Key>
+				<Property FixedLength="true" MaxLength="10" Name="PurchaseOrderID" Nullable="false" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="1" Name="ApprovalStatus" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="false" Name="ApprovalStatusDesc" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="1" Name="ConfirmationStatus" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="false" Name="ConfirmationStatusDesc" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="1" Name="OrderingStatus" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="false" Name="OrderingStatusDesc" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="1" Name="LifecycleStatus" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="false" Name="LifecycleStatusDesc" Nullable="true" Type="Edm.String"/>
+				<Property Name="GrossAmount" Nullable="true" Type="Edm.Decimal"/>
+				<Property Name="NetAmount" Nullable="true" Type="Edm.Decimal"/>
+				<Property Name="TaxAmount" Nullable="true" Type="Edm.Decimal"/>
+				<Property FixedLength="true" MaxLength="5" Name="CurrencyCode" Nullable="false" Type="Edm.String"/>
+				<Property Name="CreatedAt" Nullable="true" Type="Edm.DateTime"/>
+				<Property Name="ChangedAt" Nullable="true" Type="Edm.DateTime" m:FC_TargetPath="SyndicationUpdated"/>
+				<Property FixedLength="false" MaxLength="81" Name="CreatedByName" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="false" MaxLength="81" Name="ChangedByName" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="10" Name="SupplierID" Nullable="false" Type="Edm.String" Unicode="false"/>
+				<Property FixedLength="true" MaxLength="80" Name="SupplierName" Nullable="true" Type="Edm.String" Unicode="false"/>
+				<NavigationProperty FromRole="PurchaseOrderAR" Name="PurchaseOrder_Items" Relationship="EPMDemo.PurchaseOrder_Items" ToRole="PurchaseOrderItemAR"/>
+			</EntityType>
+			<EntityType Name="PurchaseOrderItem" m:HasStream="false">
+				<Key>
+					<PropertyRef Name="PurchaseOrderID"/>
+					<PropertyRef Name="ItemPos"/>
+				</Key>
+				<Property FixedLength="true" MaxLength="10" Name="PurchaseOrderID" Nullable="false" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="10" Name="ItemPos" Nullable="false" Type="Edm.String"/>
+				<Property Name="GrossAmount" Nullable="true" Type="Edm.Decimal"/>
+				<Property Name="NetAmount" Nullable="true" Type="Edm.Decimal"/>
+				<Property Name="TaxAmount" Nullable="true" Type="Edm.Decimal"/>
+				<Property FixedLength="true" MaxLength="5" Name="CurrencyCode" Nullable="false" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="10" Name="ProductID" Nullable="false" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="255" Name="ProductName" Nullable="true" Type="Edm.String"/>
+				<Property Name="Quantity" Nullable="false" Type="Edm.Decimal"/>
+				<Property FixedLength="true" MaxLength="3" Name="QuantityUnit" Nullable="false" Type="Edm.String"/>
+				<Property Name="DeliveryDate" Nullable="true" Type="Edm.DateTime"/>
+				<NavigationProperty FromRole="PurchaseOrderItemAR" Name="Product" Relationship="EPMDemo.PurchaseOrderItem_Product" ToRole="ProductAR"/>
+			</EntityType>
+			<ComplexType Name="Price">
+				<Property Name="Amount" Nullable="false" Type="Edm.Decimal"/>
+				<Property FixedLength="true" MaxLength="5" Name="CurrencyCode" Nullable="false" Type="Edm.String"/>
+			</ComplexType>
+			<ComplexType Name="Address">
+				<Property FixedLength="true" MaxLength="60" Name="Street" Nullable="false" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="10" Name="Building" Nullable="false" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="10" Name="Zip" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="40" Name="City" Nullable="true" Type="Edm.String"/>
+				<Property FixedLength="true" MaxLength="3" Name="Country" Nullable="false" Type="Edm.String"/>
+			</ComplexType>
+			<Association Name="Product_Supplier">
+				<End Multiplicity="*" Role="ProductAR" Type="EPMDemo.Product"/>
+				<End Multiplicity="1" Role="SupplierAR" Type="EPMDemo.Supplier"/>
+			</Association>
+			<Association Name="Supplier_PurchaseOrders">
+				<End Multiplicity="1" Role="SupplierAR" Type="EPMDemo.Supplier"/>
+				<End Multiplicity="*" Role="PurchaseOrderAR" Type="EPMDemo.PurchaseOrder"/>
+				<ReferentialConstraint>
+					<Principal Role="SupplierAR">
+						<PropertyRef Name="SupplierID"/>
+					</Principal>
+					<Dependent Role="PurchaseOrderAR">
+						<PropertyRef Name="PurchaseOrderID"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PurchaseOrder_Items">
+				<End Multiplicity="1" Role="PurchaseOrderAR" Type="EPMDemo.PurchaseOrder"/>
+				<End Multiplicity="*" Role="PurchaseOrderItemAR" Type="EPMDemo.PurchaseOrderItem"/>
+				<ReferentialConstraint>
+					<Principal Role="PurchaseOrderAR">
+						<PropertyRef Name="PurchaseOrderID"/>
+					</Principal>
+					<Dependent Role="PurchaseOrderItemAR">
+						<PropertyRef Name="PurchaseOrderID"/>
+						<PropertyRef Name="ItemPos"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PurchaseOrderItem_Product">
+				<End Multiplicity="1" Role="PurchaseOrderItemAR" Type="EPMDemo.PurchaseOrderItem"/>
+				<End Multiplicity="0..1" Role="ProductAR" Type="EPMDemo.Product"/>
+				<ReferentialConstraint>
+					<Principal Role="SupplierAR">
+						<PropertyRef Name="PurchaseOrderID"/>
+						<PropertyRef Name="ItemPos"/>
+					</Principal>
+					<Dependent Role="PurchaseOrderAR">
+						<PropertyRef Name="ProductID"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PurchaseOrder_Supplier">
+				<End Multiplicity="*" Role="PurchaseOrderAR" Type="EPMDemo.PurchaseOrder"/>
+				<End Multiplicity="1" Role="SupplierAR" Type="EPMDemo.Supplier"/>
+				<ReferentialConstraint>
+					<Principal Role="SupplierAR">
+						<PropertyRef Name="PurchaseOrderID"/>
+					</Principal>
+					<Dependent Role="PurchaseOrderAR">
+						<PropertyRef Name="SupplierID"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="EPMDemo" m:IsDefaultEntityContainer="true">
+				<EntitySet EntityType="EPMDemo.Product" Name="ProductCollection"/>
+				<EntitySet EntityType="EPMDemo.Supplier" Name="SupplierCollection"/>
+				<EntitySet EntityType="EPMDemo.PurchaseOrder" Name="PurchaseOrderCollection"/>
+				<EntitySet EntityType="EPMDemo.PurchaseOrderItem" Name="PurchaseOrderItemCollection"/>
+				<AssociationSet Association="EPMDemo.PurchaseOrder_Supplier" Name="PurchaseOrder_Supplier">
+					<End EntitySet="PurchaseOrderCollection" Role="PurchaseOrderAR"/>
+					<End EntitySet="SupplierCollection" Role="SupplierAR"/>
+				</AssociationSet>
+				<AssociationSet Association="EPMDemo.Product_Supplier" Name="Suppliers_Products">
+					<End EntitySet="ProductCollection" Role="ProductAR"/>
+					<End EntitySet="SupplierCollection" Role="SupplierAR"/>
+				</AssociationSet>
+				<AssociationSet Association="EPMDemo.PurchaseOrderItem_Product" Name="PurchaseOrderItem_Product">
+					<End EntitySet="PurchaseOrderItemCollection" Role="PurchaseOrderItemAR"/>
+					<End EntitySet="ProductCollection" Role="ProductAR"/>
+				</AssociationSet>
+				<AssociationSet Association="EPMDemo.PurchaseOrder_Items" Name="PurchaseOrder_Items">
+					<End EntitySet="PurchaseOrderCollection" Role="PurchaseOrderAR"/>
+					<End EntitySet="PurchaseOrderItemCollection" Role="PurchaseOrderItemAR"/>
+				</AssociationSet>
+				<FunctionImport EntitySet="PurchaseOrderCollection" Name="ApprovePurchaseOrder" ReturnType="EPMDemo.PurchaseOrder">
+					<Parameter Mode="In" Name="PurchaseOrderID" Type="Edm.String"/>
+					<Parameter Mode="In" Name="ApprovalStatus" Type="Edm.String"/>
+				</FunctionImport>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx><!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->

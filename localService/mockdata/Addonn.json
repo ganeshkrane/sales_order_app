@@ -1,0 +1,32 @@
+[
+  {
+    "mainArtnr": "HT-1000",
+    "artNr": "AD-1001",
+    "desc": "Extended Warranty - 1 Year",
+    "price": 49.99
+  },
+  {
+    "mainArtnr": "HT-1000",
+    "artNr": "AD-1002",
+    "desc": "Protective Carry Case",
+    "price": 24.50
+  },
+  {
+    "mainArtnr": "HT-1000",
+    "artNr": "AD-1003",
+    "desc": "Wireless Charging Station",
+    "price": 79.00
+  },
+  {
+    "mainArtnr": "HT-1000",
+    "artNr": "AD-1004",
+    "desc": "Premium Support Package",
+    "price": 99.99
+  },
+  {
+    "mainArtnr": "HT-1000",
+    "artNr": "AD-1005",
+    "desc": "Replacement Power Adapter",
+    "price": 19.95
+  }
+]

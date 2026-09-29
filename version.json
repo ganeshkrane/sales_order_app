@@ -1,0 +1,8 @@
+{ "application" : "cus.sd.zsalesorder.create",
+  "version" : "1.6.11",
+  "buildNumber" : "8",
+  "buildId" : "2017-09-28_20-13-59",
+  "branch" : "origin/rel-1.6",
+  "revision" : "22f32513ad35291ae6dc10bba49e8e0dfe829bf9",
+  "GitURL" : ""
+}

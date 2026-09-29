@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog id="dlgAddOnAdd" noDataText="No Products Found"
+		title="Select Product" search="handleSearchAddon" confirm="handleCloseAddon"
+		cancel="handleCloseAddon" items="{path : 'addon>/aAddons'}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="{addon>mainArtnr}" />
+				<ObjectIdentifier title="{addon>artNr}" />
+				<Text text="{addon>desc}" />
+				<Text text="{addon>price}" />
+
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Main Article" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Add-on Article" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="Description" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+				<header>
+					<Text text="Price" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

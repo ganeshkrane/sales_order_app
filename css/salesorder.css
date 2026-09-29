@@ -1,0 +1,326 @@
+.soc-table-elem-align{
+	display:inline-block;
+	padding-top:.3rem;
+}
+
+.soc-checkbox-elem-align{
+	margin-top:-.5rem;
+	padding:0;
+}
+
+.soc-quantity-align{
+	padding-top: .8rem;
+	padding-left:.2rem;
+}
+
+.soc-table-label-elem-align{
+	margin-top:.1rem;
+}
+
+
+/* SAP Fiori Delivery / Collection Screen Exact Styling */
+
+/* Page Background */
+.deliveryPageBg {
+  background-color: #edeff2 !important;
+}
+
+/* Top Shell Header Bar */
+.deliveryTopShellBar {
+  background-color: #1a2f44 !important;
+  color: #ffffff !important;
+  border-bottom: none !important;
+  padding: 0 1rem !important;
+  height: 48px !important;
+}
+
+.deliveryTopShellBar .sapMBarLeft,
+.deliveryTopShellBar .sapMBarRight,
+.deliveryTopShellBar .sapMBarPH {
+  color: #ffffff !important;
+}
+
+.deliveryTopShellBar .sapMBtnTransparent {
+  color: #ffffff !important;
+}
+
+.deliveryTopShellBar .sapMBtnIcon {
+  color: #ffffff !important;
+}
+
+.deliveryTopShellBar .sapMText,
+.deliveryTopShellBar .sapMTitle {
+  color: #ffffff !important;
+}
+
+.deliveryNavMenuBtn .sapMBtnContent {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+
+.deliveryNavMenuBtn .sapMBtnIcon {
+  color: #ffffff !important;
+}
+
+/* User Avatar */
+.deliveryUserAvatar {
+  background-color: #0070f2 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* Main Content Card Container */
+.deliveryMainCard {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  border: 1px solid #e0e4e9 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  margin: 1.25rem !important;
+  padding: 1.5rem !important;
+}
+
+/* Page Title */
+.deliveryCardTitle {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #1a202c !important;
+}
+
+/* Green Status Badge */
+.deliveryStatusPill {
+  display: inline-flex !important;
+  align-items: center !important;
+  background-color: #eaf7ec !important;
+  border: 1px solid #c3e6cb !important;
+  border-radius: 20px !important;
+  padding: 4px 14px !important;
+  color: #107e3e !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+}
+
+.deliveryStatusPill .sapUiIcon {
+  color: #107e3e !important;
+  margin-right: 6px !important;
+}
+
+/* Section Titles with divider */
+.deliverySectionTitle {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #2d3748 !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.deliverySectionDivider {
+  height: 1px !important;
+  background-color: #edf2f7 !important;
+  width: 100% !important;
+  margin-bottom: 0.85rem !important;
+}
+
+/* Readonly / Display Field Box */
+.displayFieldBox {
+  background-color: #f4f6f8 !important;
+  border: 1px solid #dcdfe4 !important;
+  border-radius: 6px !important;
+  color: #333a42 !important;
+  font-size: 13px !important;
+  padding: 0 10px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.displayFieldBox.hasIcon {
+  justify-content: space-between !important;
+}
+
+/* Currency ZAR Box */
+.currencyAddonBox {
+  background-color: #f4f6f8 !important;
+  border: 1px solid #dcdfe4 !important;
+  border-radius: 6px !important;
+  color: #333a42 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  height: 36px !important;
+  min-width: 54px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-left: 8px !important;
+}
+
+/* Action Buttons */
+.btnHistoryOutline {
+  border: 1px solid #0064d9 !important;
+  color: #0064d9 !important;
+  background-color: transparent !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+.btnCancelOutline {
+  border: 1px solid #0064d9 !important;
+  color: #0064d9 !important;
+  background-color: transparent !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+.btnSaveSolid {
+  background-color: #0064d9 !important;
+  border-color: #0064d9 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+.btnSaveSolid .sapMBtnIcon {
+  color: #ffffff !important;
+}
+
+.btnCloseTransparent {
+  color: #0064d9 !important;
+  font-weight: 600 !important;
+}
+
+/* Delivery Schedules Single-Row Alignment */
+.deliverySchedulesRow {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  padding: 0.35rem 0 !important;
+}
+
+@media (max-width: 1024px) {
+  .deliverySchedulesRow {
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Bold styling for Net Item Price when discount is applied */
+.boldNetPrice {
+  font-weight: 700 !important;
+}
+
+.boldNetPrice .sapMObjStatusText,
+.boldNetPrice .sapMObjStatusTitle,
+.boldNetPrice .sapMText {
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+}
+
+/* Subtle typography for Promotion Type in table */
+.promoTypeSubText {
+  font-size: 0.75rem !important;
+  color: #6a6d70 !important;
+  line-height: 1.15 !important;
+}
+
+/* Notebook Basic 17 Special Promotion Layout Styles */
+.strikethroughPrice {
+  text-decoration: line-through !important;
+  color: #71717a !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+}
+
+.promoDiscountPill .sapMObjStatusText {
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  background-color: #dcfce7 !important;
+  color: #15803d !important;
+  padding: 1px 5px !important;
+  border-radius: 3px !important;
+  line-height: 1.1 !important;
+}
+
+.newPromoUnitPrice .sapMObjStatusText,
+.newPromoUnitPrice {
+  color: #107e3e !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.2 !important;
+}
+
+.promoSubTag {
+  font-size: 0.68rem !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  background-color: #e8f5e9 !important;
+  color: #1b5e20 !important;
+  padding: 1px 5px !important;
+  border-radius: 3px !important;
+  border: 1px solid #c8e6c9 !important;
+  line-height: 1.1 !important;
+}
+
+.promoSubText {
+  font-size: 0.72rem !important;
+  color: #71717a !important;
+  font-style: italic !important;
+  line-height: 1.15 !important;
+}
+
+.boldNetPriceHighlight .sapMObjStatusText {
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  color: #107e3e !important;
+}
+
+.boldDiscountBadge .sapMObjStatusText {
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  color: #107e3e !important;
+}
+
+.notebookPromoCard {
+  background: #f0fdf4 !important;
+  border: 1px solid #bbf7d0 !important;
+  border-left: 3px solid #16a34a !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+}
+
+.notebookPromoBadgeTitle .sapMObjStatusText {
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  color: #15803d !important;
+}
+
+.notebookPromoBadgeSub {
+  font-size: 0.72rem !important;
+  color: #374151 !important;
+  line-height: 1.2 !important;
+}
+
+.notebookPromoOfferPill {
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  color: #15803d !important;
+  background: #dcfce7 !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  border: 1px solid #86efac !important;
+}
+
+.promoItemTag {
+  font-size: 0.72rem !important;
+  color: #16a34a !important;
+  font-weight: 600 !important;
+}
+
+.specialPromoGrossPriceBox,
+.specialPromoNetPriceBox {
+  min-width: 8.5rem !important;
+}
+

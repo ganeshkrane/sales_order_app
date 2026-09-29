@@ -1,0 +1,15 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<ObjectListItem xmlns="sap.m"  xmlns:sap.ui.core="sap.ui.core" type="{device>/listItemType}" press="_handleItemPress"
+					title="{parts:[{path:'i18n>SO'},{path:'SalesOrderNumber'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}"
+					number="{path: 'TotalAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountShort'}"
+                    numberUnit="{Currency}">
+					<attributes>
+						<ObjectAttribute  text="{path:'ShipToPartnerName', formatter:'cus.sd.zsalesorder.create.util.Formatter.formatSOTo'}" />
+						<!-- Extension point for Sales Order Master List let you add new field in master list -->
+						<sap.ui.core:ExtensionPoint name="extSalesOrderListAttributes" />
+					</attributes>
+</ObjectListItem>

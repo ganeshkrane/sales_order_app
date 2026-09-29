@@ -1,0 +1,44 @@
+[
+  {
+    "SalesOrderNumber": "0000010001",
+    "PO": "PO-98765",
+    "CustomerID": "1000",
+    "CustomerName": "TechCorp Solutions",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00",
+    "TotalAmount": "4500.00",
+    "Currency": "ZAR",
+    "OrderDate": "20260801",
+    "RequestedDate": "20260815",
+    "Status": "Approved"
+  },
+  {
+    "SalesOrderNumber": "0000010002",
+    "PO": "PO-98766",
+    "CustomerID": "1000",
+    "CustomerName": "TechCorp Solutions",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00",
+    "TotalAmount": "1250.50",
+    "Currency": "ZAR",
+    "OrderDate": "20260802",
+    "RequestedDate": "20260820",
+    "Status": "In Process"
+  },
+  {
+    "SalesOrderNumber": "0000010003",
+    "PO": "PO-98767",
+    "CustomerID": "2000",
+    "CustomerName": "Global Logistics Ltd",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00",
+    "TotalAmount": "8900.00",
+    "Currency": "EUR",
+    "OrderDate": "20260803",
+    "RequestedDate": "20260825",
+    "Status": "Approved"
+  }
+]

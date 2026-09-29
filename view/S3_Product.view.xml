@@ -1,0 +1,60 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View 
+
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:sap.ui.layout="sap.ui.layout"
+    xmlns:ui="sap.ca.ui"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="cus.sd.zsalesorder.create.view.S3_Product">
+
+<Page id="ProductDetail" title="{i18n>PRODUCT_DETAIL}" class="sapUiFioriObjectPage" showNavButton="{device>/isPhone}"
+  navButtonPress="_onNavigateBack" >
+ 		<headerContent>
+            <Button id="CART_BUTTON" icon="{img>/cartIcon}" press="_goToCart" text="{soc_cart>/itemCount}" />
+        </headerContent>
+        <content>
+            <ObjectHeader id="header" title="{product>/productDesc}" number="{path: 'product>/productListPrice', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"
+                                        numberUnit="{parts:[{path:'product>/currency'},{path:'product>/uom'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.formatCurrencyPerUnit'}"
+                                        introActive="false" titleActive="false" iconActive="false" responsive="true">
+
+                <attributes>
+                    <ObjectAttribute text="{path: 'product>/productID', formatter:'cus.sd.zsalesorder.create.util.Formatter.formatProductNoId'}" active="false"></ObjectAttribute>
+                </attributes>
+            </ObjectHeader>
+
+            <mvc:XMLView id="soDeliveryCollection" viewName="cus.sd.zsalesorder.create.view.DeliveryCollection"></mvc:XMLView>
+            
+            <Table id="oInformationListLeft"  inset="true" headerText="{i18n>DETAILS_INFORMATION}" showNoData="false" items="{product>/productAttributes}">
+                <items>
+                    <ColumnListItem unread="true" counter="0">
+                        <cells>
+                            <Label text="{product>CharactDescr}"></Label>
+                            <Label text="{product>ValueChar}"></Label>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <columns>
+                    <Column hAlign="Left" minScreenWidth="tablet" demandPopin="true">
+                    </Column>
+                    <Column hAlign="Left" minScreenWidth="tablet" demandPopin="true">
+                    </Column>
+                </columns>
+            </Table>
+        </content>
+        <footer>
+            <Bar>
+                <contentRight>
+                    <Button id="reset" press="_resetProductToCart" text="Reset Cart"></Button>
+                    <Button id="add" press="_addProductToCart" type="Emphasized" text="{i18n>ADD_TO_CART}"></Button>
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+
+   </core:View>

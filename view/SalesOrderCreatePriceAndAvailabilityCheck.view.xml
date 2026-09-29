@@ -1,0 +1,125 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View  xmlns="sap.m"
+xmlns:sap.ui.layout.form="sap.ui.layout.form"
+xmlns:sap.ui.layout="sap.ui.layout"  xmlns:core="sap.ui.core" xmlns:ui="sap.ca.ui" controllerName="cus.sd.zsalesorder.create.view.SalesOrderCreatePriceAndAvailabilityCheck" >
+
+    <Page id="SOC_PRICE_AND_AVAILABILITY_CHECK_PAGE" class="sapUiFioriObjectPage">
+        <content>
+            <sap.ui.layout.form:SimpleForm maxContainerCols="1" minWidth="1024" editable="false">
+				<sap.ui.layout.form:content>
+					<core:Title id="SO_CartPriceAndAvaibilityHeader" text="{i18n>DELIVERY_SCHEDULES}" />
+                    <Label text="{i18n>CUSTOMER}">
+                    	<layoutData>
+                            <sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+                        </layoutData>
+                    </Label>
+                    <Text text="{soc_cart>/CustomerName}" maxLines="0">
+                    	<layoutData>
+                            <sap.ui.layout:ResponsiveFlowLayoutData weight="5"></sap.ui.layout:ResponsiveFlowLayoutData>
+                        </layoutData>
+                    </Text>
+
+                    <Label class="soc-table-label-elem-align" text="{i18n>REQUESTED_DELIVERY}">
+                    	<layoutData>
+                            <sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+                        </layoutData>
+                    </Label>
+                    <ui:DatePicker id="SOC_PAC_SINGLE_RDD" value="{path : 'soc_cart>/formatSingleRdd', type:'sap.ca.ui.model.type.Date', formatOptions: {sytle:'medium'}}" change="setUniformSingleRdd" width="170em"></ui:DatePicker>
+                    <Label class="soc-table-elem-align" text="{i18n>SINGLE_SHIPMENT}">
+                    	<layoutData>
+                            <sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+                        </layoutData>
+                    </Label>
+
+                    <CheckBox id="SOC_SINGLE_SHIPMENT_CHECKBOX" width="0.5em" class="soc-checkbox-elem-align"  select="setSingleShipmentDate">
+                    	<layoutData>
+                            <sap.ui.layout:ResponsiveFlowLayoutData weight="5"></sap.ui.layout:ResponsiveFlowLayoutData>
+                        </layoutData>
+                    </CheckBox>
+				</sap.ui.layout.form:content>
+            </sap.ui.layout.form:SimpleForm>
+            <Table id="items" inset="true"
+            		headerText="{parts:[{path:'i18n>SO_ITM_ORD_ITMS'},{path:'soc_cart>/itemCount'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}"
+            		items="{soc_cart>/oShoppingCartItems}">
+                <items>
+                    <ColumnListItem unread="true" counter="0">
+                        <cells>
+                            <Image id="SOC_PRODUCT_IMG" src="{soc_cart>ImgUrl}" visible="{isVisible}" width="4em" densityAware="false"></Image>
+							<ObjectIdentifier id="SOC_PRODUCT_NO" class="soc-table-label-elem-align"
+                                title="{parts:[{path:'soc_cart>ProductID'}, {path:'soc_cart>ProductDesc'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.formatProductIDDesc'}"
+                                badgeNotes="false" badgePeople="false" badgeAttachments="false"></ObjectIdentifier>
+                            <sap.ui.layout:ResponsiveFlowLayout>
+                                <sap.ui.layout:content>
+                                    <Input id="SOC_QTY" liveChange="onNumberEnter" value="{path:'soc_cart>qty', type:'sap.ui.model.type.Integer'}"
+                                    	visible="{soc_cart>isVisible}" maxLength="10"></Input>
+                                    <Label id="SOC_UOM" class="soc-quantity-align" text="{soc_cart>UnitofMeasureTxt}" visible="{isVisible}"></Label>
+                                </sap.ui.layout:content>
+                            </sap.ui.layout:ResponsiveFlowLayout>
+ 			   				<ui:DatePicker  id="SOC_PAC_RDD" value="{path : 'soc_cart>formatRDD', type:'sap.ca.ui.model.type.Date', formatOptions: {sytle:'medium'}}"
+								change="setUniformRDD" visible="{soc_cart>isVisible}" width="12em"></ui:DatePicker>
+                            <ObjectStatus id="SOC_AVAILABLE_QTY" class="soc-table-label-elem-align" text="{soc_cart>AvailQuantity}" state="{soc_cart>AvailableQuantityStatus}"></ObjectStatus>
+    						<ObjectStatus id="SOC_ESTIMATED_DATE" class="soc-table-label-elem-align" text="{soc_cart>EstimatedDelivery}" state="{soc_cart>EstimatedDeliveryStatus}"></ObjectStatus>
+                            <ObjectNumber id="SOC_FINAL_PRICE" class="soc-table-label-elem-align" number="{path: 'soc_cart>FinalPrice', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"></ObjectNumber>
+                            <ObjectNumber id="SOC_NET_AMOUNT" class="soc-table-label-elem-align" number="{path: 'soc_cart>NetAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"></ObjectNumber>
+                            <!-- Extension point for table column value let you add new field in table -->
+							<core:ExtensionPoint name="extSOCCartTableColumnValue" />
+							<Button id="SOC_REMOVE" tap="removeItem" type="Transparent" visible="{soc_cart>isVisible}" icon="sap-icon://sys-cancel" class="sapMLIBSelectD"></Button>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <columns>
+                    <Column hAlign="Left" width="3rem" minScreenWidth="tablet" demandPopin="true"></Column>
+                    <Column hAlign="Left" demandPopin="true" minScreenWidth="desktop" width="10%">
+                        <header>
+                            <Text text="{i18n>SO_ITM}" width="100%" maxLines="0"></Text>
+                        </header>
+                    </Column>
+                    <Column hAlign="Left" minScreenWidth="tablet" demandPopin="true" width="20%">
+                        <header>
+                            <Text text="{i18n>QUANTITY}" width="100%" maxLines="0"></Text>
+                        </header>
+                    </Column>
+                    <Column hAlign="Left" minScreenWidth="tablet" demandPopin="true" width="20%">
+                        <header>
+                            <Text text="{i18n>REQUESTED_DELIVERY}" width="100%" maxLines="0"></Text>
+                        </header>
+                    </Column>
+                    <Column hAlign="Left" minScreenWidth="tablet" demandPopin="true" width="10%">
+                        <header>
+                            <Text text="{i18n>AVAILABLE_QUANTITY}" width="100%" maxLines="0"></Text>
+                        </header>
+                    </Column>
+                    <Column hAlign="Left" minScreenWidth="tablet" demandPopin="true" width="12%">
+                        <header>
+                            <Text text="{i18n>ESTIMATED_DELIVERY}" width="100%" maxLines="0"></Text>
+                        </header>
+                    </Column>
+                    <Column hAlign="Right" minScreenWidth="tablet" demandPopin="true" width="9%">
+                        <header>
+                            <Text text="{parts:[{path:'i18n>SO_ITM_YOUR_PRICE_CUR'},{path:'soc_cart>/Currency'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}" width="100%" maxLines="0"></Text>
+                        </header>
+                        <footer>
+                            <Label text="{i18n>TOTAL}"></Label>
+                        </footer>
+                    </Column>
+                    <Column width="9%" hAlign="Right">
+                        <header>
+                            <Text text="{parts:[{path:'i18n>SUB_TOTAL_CUR'},{path:'soc_cart>/Currency'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}" width="100%" maxLines="0"></Text>
+                        </header>
+                        <footer>
+                            <ObjectNumber number="{path: 'soc_cart>/TotalAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"></ObjectNumber>
+                        </footer>
+                    </Column>
+                    <!-- Extension point for table column header and let you add new table column header -->
+					<core:ExtensionPoint name="extSOCCartTableColumnHeader" />
+					<Column hAlign="Right" width="2rem" demandPopin="true"></Column>
+                </columns>
+            </Table>
+        </content>
+       
+    </Page>
+</core:View>

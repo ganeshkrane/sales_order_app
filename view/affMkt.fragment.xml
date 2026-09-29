@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+  <Panel id="SimpleFormMarketing" expandable="false" expanded="true"
+    visible="true">
+
+    <content>
+
+      <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+        <items>
+          <TextView xmlns="sap.ui.commons" text="{i18n&gt;mrktConsent}"
+            design="H5" />
+
+          <Select id="mrktConsentSel" change="onMrktConsent" width="10rem"
+            selectedKey="{path:'oModelAfford&gt;/d/marketingOption'}">
+            <items>
+              <core:Item key="" text="" />
+              <core:Item key="Yes" text="Yes" />
+              <core:Item key="No" text="No" />
+            </items>
+          </Select>
+
+        </items>
+      </FlexBox>
+
+
+
+
+      <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+        <items>
+          <TextView id="txtmrktPrefLangSel" xmlns="sap.ui.commons"
+            text="{i18n&gt;mrktPrefLang}" design="H5" />
+<!-- items="{path: '/d/prefLang'}" -->
+          <Select id="mrktPrefLangSel" 
+            change="onMrktPrefLang" width="10rem"
+            selectedKey="{path:'oModelAfford&gt;/d/prefCorrLang'}">
+            <items>
+              <core:Item key="{key}" text="{text}" />
+            </items>
+          </Select>
+
+        </items>
+      </FlexBox>
+
+
+
+
+      <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+        <items>
+          <TextView id="txtmktCorrMethodSel" xmlns="sap.ui.commons"
+            text="{i18n&gt;mrktCorrMethod}" design="H5" />
+
+          <!--  <Select id="mktCorrMethodSel" items="{path: '/d/prefCorrMethod'}"
+            change="onMrktCorrMethod" width="10rem"
+            selectedKey="{path:'oModelAfford&gt;/d/prefCorrMethod'}">
+            <items>
+              <core:Item key="{key}" text="{text}" />
+            </items>
+          </Select>width="10rem"-->
+
+
+          <List
+            id="mktCorrMethodSel" visible="false"
+            mode="MultiSelect"
+            includeItemInSelection="true"
+            selectionChange="onMrktCorrMethod">
+            <StandardListItem
+              title="{text}"/>
+          </List>
+
+
+
+        </items>
+      </FlexBox>
+
+
+
+
+      <!-- <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+        <items>
+          <TextView xmlns="sap.ui.commons" text="{i18n&gt;stmtCorrMethod}"
+            design="H5" id="stmtCorrMethodTxt"/>
+          <Select id="stmtCorrMethodSel" items="{path: '/d/stmtCorrMethod'}"
+            change="onMrktstmtCorrMethod" width="10rem"
+            selectedKey="{path:'oModelAfford&gt;/d/stmtCorrMethod'}">
+            <items>
+              <core:Item key="{key}" text="{text}" />
+            </items>
+          </Select>
+
+        </items>
+      </FlexBox> -->
+
+
+
+
+
+
+      <!-- <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+        <items>
+          <TextView id="txtmrktFutureCreditCheckSel" xmlns="sap.ui.commons"
+            text="{i18n&gt;mrktFutureCreditCheck}" design="H5" />
+
+          <Select id="mrktFutureCreditCheckSel" width="10rem"
+            change="onFutureCreditCheck" selectedKey="{path:'oModelAfford&gt;/d/mrktFutureCreditCheck'}">
+            <items>
+              <core:Item key="" text="" />
+              <core:Item key="Yes" text="Yes" />
+              <core:Item key="No" text="No" />
+            </items>
+          </Select>
+
+
+        </items>
+      </FlexBox> -->
+
+      <!-- <FlexBox alignItems="Start" justifyContent="SpaceBetween" id="idFbYearlyIncrease" visible="false">
+        <items>
+          <TextView id="txtmrktYearlyIncreaseSel" xmlns="sap.ui.commons"
+            text="Do you wish to qualify for an automatic annual increase in 12 months time?" design="H5" />
+
+          <Select id="mrktYearlyIncreaseSel" width="10rem"
+            change="onYearlyIncrease" selectedKey="{path:'oModelAfford&gt;/d/mrktYearlyIncrease'}">
+            <items>
+              <core:Item key="Yes" text="Yes" />
+              <core:Item key="No" text="No" />
+            </items>
+          </Select>
+
+
+        </items>
+      </FlexBox> -->
+
+        <Text  renderWhitespace="true"/>
+        <Text  renderWhitespace="true"/>
+
+
+      <!-- <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+        <items>
+          <TextView id="txtmrktFurtherActionCheckSel" xmlns="sap.ui.commons"
+            text="{i18n&gt;mrktFurtherActionCheck}" design="H5" />
+
+          <Select id="mrktFurtherActionCheckSel" width="10rem"
+            change="onFurtherActionCheck" selectedKey="{path:'oModelAfford&gt;/d/mrktFurtherActionCheck'}">
+            <items>
+              <core:Item key="No" text="No" />
+              <core:Item key="Yes" text="Yes" />
+            </items>
+          </Select>
+
+
+        </items>
+      </FlexBox> -->
+
+      <FlexBox alignItems="Start" justifyContent="SpaceBetween" id="fBoxPlusMore" visible="true">
+        <items>
+          <TextView id="txtmrktPlusMoreSel" xmlns="sap.ui.commons"
+            text="Would you like to register for the +more loyalty programme?" design="H5" />
+
+          <Select id="mrktPlusMoreSel" width="10rem"
+            change="onPlusMoreCheck" selectedKey="{path:'oModelAfford&gt;/d/mrktPlusMore'}">
+            <items>
+               <core:Item key=" " text=" " />
+              <core:Item key="No" text="No" />
+              <core:Item key="Yes" text="Yes" />
+            </items>
+          </Select>
+
+
+        </items>
+      </FlexBox>
+
+
+    </content>
+  </Panel>
+</core:FragmentDefinition>

@@ -1,0 +1,6 @@
+{
+  "name": "Create Sales Orders - SAP Fiori",
+  "description": "SAPUI5 Create Sales Orders (F0018) application running with local mock JSON dataset.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

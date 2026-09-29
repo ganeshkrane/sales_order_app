@@ -1,0 +1,344 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<sap.ui.core:View
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:sap.ui.layout="sap.ui.layout"
+    xmlns:ui="sap.ca.ui"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:sap.ui.core="sap.ui.core" controllerName="cus.sd.zsalesorder.create.view.SalesOrderCreateCart" >
+
+    <Page id="SOC_CREATE_CART_PAGE" title="Sales Order Shopping Cart" showNavButton="true" navButtonPress=".onNavigateHome" class="sapUiFioriObjectPage">
+        
+        <content>
+          <!-- Header Level Information Form (PEPKOR Lifestyle Omnichannel POS) -->
+          <f:SimpleForm id="SO_DeliverySchedulesForm"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                class="deliverySchedulesForm sapUiSmallMarginBottom">
+                <f:content>
+                    <sap.ui.core:Title id="SO_CartHeader" text="{i18n>DELIVERY_SCHEDULES}" />
+                    <HBox alignItems="Center" justifyContent="SpaceBetween" class="deliverySchedulesRow" width="100%">
+                        <!-- Customer & Store / Cashier Stacked -->
+                        <VBox class="sapUiSmallMarginEnd">
+                            <!-- Customer -->
+                            <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                <Label text="{i18n>CUSTOMER}:" design="Bold" class="sapUiSmallMarginEnd" width="8.5rem"/>
+                                <Text text="{path:'soc_cart>/CustomerName', formatter:'.formatCustomerName'}"/>
+                            </HBox>
+                            <!-- Store & Cashier below Customer -->
+                            <HBox alignItems="Center">
+                                <Label text="Store / Cashier:" design="Bold" class="sapUiSmallMarginEnd" width="8.5rem"/>
+                                <Text text="Store 6802 - FOURWAYS / Cashier 121 (Rep 999999)"/>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Requested Delivery Date -->
+                        <HBox alignItems="Center">
+                            <Label class="soc-table-label-elem-align sapUiSmallMarginEnd" text="{i18n>REQUESTED_DELIVERY}" design="Bold" width="12rem"/>
+                            <ui:DatePicker id="SOC_CART_SINGLE_RDD"
+                                value="{path : 'soc_cart>/formatSingleRdd', type:'sap.ca.ui.model.type.Date', formatOptions: {sytle:'medium'}}"
+                                change="setUniformSingleRdd"
+                                width="12rem"/>
+                        </HBox>
+                    </HBox>   
+                </f:content>
+            </f:SimpleForm>
+
+            <!-- Status Toolbar -->
+            <Toolbar>
+                <Label text="Status:" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" design="Bold"></Label>
+                <ObjectStatus text="{path:'soc_cart>/oShoppingCartItems/0/ProductID', formatter: '.formatcustomerNumber'}" state="Success" class="sapUiSmallMarginEnd"/>
+            </Toolbar>
+
+            <!-- Stock Availability MessageStrip -->
+            <MessageStrip text="{path:'soc_cart>/oShoppingCartItems/0/ProductID', formatter: '.formatoaaMessage'}" 
+                          visible="{path:'soc_cart>/oShoppingCartItems/0/ProductID', formatter: '.visibleMessage'}"
+                          type="{path:'soc_cart>/oShoppingCartItems/0/ProductID', formatter: '.setType'}"
+                          showIcon="true" showCloseButton="true" class="sapUiSmallMarginBottom"></MessageStrip>
+
+            <!-- Tab 1: Sales Order Table with Item Level Pricing -->
+            <ScrollContainer horizontal="true" vertical="false" width="100%" visible="{=${soc_cart1>/activeTab} === 'sales'}">
+                <Table id="SOC_CART_LIST" inset="true" width="2150px"
+                    mode="MultiSelect"
+                    selectionChange=".onItemSelectionChange"
+            		items="{soc_cart>/oShoppingCartItems}">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="{parts:[{path:'i18n>SO_ITM_ORD_ITMS'},{path:'soc_cart>/itemCount'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}" level="H2" class="sapUiSmallMarginEnd"/>
+                            <Button id="btnSalesTab" text="Sales Items"
+                                type="{=${soc_cart1>/activeTab} === 'sales' ? 'Emphasized' : 'Default'}"
+                                press=".onPressSalesTab"
+                                class="sapUiTinyMarginEnd"/>
+                            <Button id="btnConditionsTab" text="Conditions (Pricing)"
+                                type="{=${soc_cart1>/activeTab} === 'conditions' ? 'Emphasized' : 'Default'}"
+                                press=".onPressConditionsTab"/>
+                            <ToolbarSpacer/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <!-- 1. Item -->
+                        <Column hAlign="Left" width="4.5rem">
+                            <header><Text text="{i18n>ITEM}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 2. Article -->
+                        <Column hAlign="Left" width="7rem">
+                            <header><Text text="{i18n>ARTICLE}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 3. Target Qty -->
+                        <Column hAlign="Left" width="5.5rem">
+                            <header><Text text="{i18n>TARGET_QTY}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 4. UM -->
+                        <Column hAlign="Left" width="4rem">
+                            <header><Text text="{i18n>UM}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 5. Description -->
+                        <Column hAlign="Left" width="16rem">
+                            <header><Text text="{i18n>DESCRIPTION}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 6. Product No. -->
+                        <Column hAlign="Left" width="8rem">
+                            <header><Text text="{i18n>PRODUCT_NO}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 7. Value-Adds (Addon) -->
+                        <Column hAlign="Center" width="8rem">
+                            <header><Text text="{i18n>VALUE_ADDS}" textAlign="Center" width="100%"/></header>
+                        </Column>
+                        <!-- 8. Gross Price / Unit -->
+                        <Column hAlign="Left" width="10.5rem">
+                            <header><Text text="Gross Price" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 9. Discount (%) -->
+                        <Column hAlign="Left" width="7.5rem">
+                            <header><Text text="Discount (%)" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 10. Net Item Price -->
+                        <Column hAlign="Left" width="11rem">
+                            <header><Text text="Net Item Price" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 11. Promotion Applied -->
+                        <Column hAlign="Left" width="16.5rem">
+                            <header><Text text="Promotion Applied" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 12. Sales Person ID -->
+                        <Column hAlign="Left" width="8rem">
+                            <header><Text text="{i18n>SALES_PERSON_ID}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 13. Site -->
+                        <Column hAlign="Left" width="6rem">
+                            <header><Text text="{i18n>SITE}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 14. Item Category -->
+                        <Column hAlign="Left" width="8.5rem">
+                            <header><Text text="{i18n>ITEM_CATEGORY}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 15. Extended Guarantee Product -->
+                        <Column hAlign="Left" width="10rem">
+                            <header><Text text="{i18n>EXT_GUARANTEE_PROD}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 16. Rej. Reason -->
+                        <Column hAlign="Left" width="8.5rem">
+                            <header><Text text="{i18n>REJ_REASON}" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- Action (Remove) -->
+                        <Column hAlign="Center" width="3.5rem">
+                            <header><Text text=""/></header>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem unread="true" counter="0">
+                            <cells>
+                                <!-- 1. Item -->
+                                <Text id="SOC_ITEM_LINE" text="{soc_cart>itemLine}"/>
+                                <!-- 2. Article -->
+                                <Text text="{soc_cart>article}"/>
+                                <!-- 3. Target Qty -->
+                                <Input id="SOC_QTY" liveChange=".onNumberEnter" change=".onNumberEnter" value="{path:'soc_cart>qty', type:'sap.ui.model.type.Integer'}" width="100%"/>
+                                <!-- 4. UM -->
+                                <Text id="SOC_UOM" text="{soc_cart>UnitofMeasureTxt}"/>
+                                <!-- 5. Description -->
+                                <VBox justifyContent="Center">
+                                    <ObjectIdentifier id="SOC_DESCRIPTION" title="{soc_cart>ProductDesc}"/>
+                                    <HBox alignItems="Center" visible="{soc_cart>isNotebookBasic17}" class="sapUiTinyMarginTop">
+                                        <sap.ui.core:Icon src="sap-icon://tag" size="0.75rem" color="#16a34a" class="sapUiTinyMarginEnd"/>
+                                        <Text text="Promotional Item (ZP32)" class="promoItemTag"/>
+                                    </HBox>
+                                </VBox>
+                                <!-- 6. Product No. -->
+                                <Text id="SOC_PRODUCT_NO" text="{soc_cart>ProductID}"/>
+                                <!-- 7. Value-Adds (Addon) -->
+                                <Button id="btnAddLinkedProd" text="{i18n>VALUE_ADDS}" press=".onAddLinkedProd"
+                                    visible="{=${soc_cart>addOnFlg} !== 'Y'}" type="Transparent" app:item="{soc_cart>itemLine}"/>
+                                <!-- 8. Gross Price / Unit -->
+                                <VBox visible="{=!${soc_cart>isNotebookBasic17}}">
+                                    <Text text="{path:'soc_cart>grossUnitPrice', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2}} {soc_cart>currency}"/>
+                                </VBox>
+                                <VBox visible="{soc_cart>isNotebookBasic17}" class="specialPromoGrossPriceBox">
+                                    <!-- Strikethrough original gross price with discount pill -->
+                                    <HBox alignItems="Center">
+                                        <Text text="{path:'soc_cart>grossUnitPrice', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2}} {soc_cart>currency}" class="strikethroughPrice sapUiTinyMarginEnd"/>
+                                        <ObjectStatus text="{= '-' + (${soc_cart>discountPercent} || '50') + '%'}" state="Success" class="promoDiscountPill"/>
+                                    </HBox>
+                                    <!-- New discounted unit price as per % discount -->
+                                    <HBox alignItems="Center" class="sapUiTinyMarginTop">
+                                        <ObjectStatus text="{path:'soc_cart>pricePerUnit', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2}} {soc_cart>currency}" state="Success" class="newPromoUnitPrice"/>
+                                        <Text text="promo" class="promoSubTag sapUiTinyMarginBegin"/>
+                                    </HBox>
+                                </VBox>
+                                <!-- 9. Discount (%) -->
+                                <ObjectStatus text="{= ${soc_cart>discountPercent} ? (${soc_cart>discountPercent} + '%') : '0%'}" state="{= ${soc_cart>discountPercent} > 0 ? 'Success' : 'None'}" visible="{=!${soc_cart>isNotebookBasic17}}"/>
+                                <VBox visible="{soc_cart>isNotebookBasic17}">
+                                    <ObjectStatus text="{= (${soc_cart>discountPercent} || '50') + '%'}" state="Success" class="boldDiscountBadge"/>
+                                    <Text text="Special 50%" class="promoSubText sapUiTinyMarginTop"/>
+                                </VBox>
+                                <!-- 10. Net Item Price -->
+                                <ObjectStatus text="{path:'soc_cart>itemPrice', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2}} {soc_cart>currency}" state="{= ${soc_cart>discountPercent} > 0 ? 'Success' : 'None'}" class="{= ${soc_cart>discountPercent} > 0 ? 'boldNetPrice' : ''}" visible="{=!${soc_cart>isNotebookBasic17}}"/>
+                                <VBox visible="{soc_cart>isNotebookBasic17}" class="specialPromoNetPriceBox">
+                                    <!-- Struck-through Gross Total -->
+                                    <HBox alignItems="Center">
+                                        <Text text="{path:'soc_cart>grossPrice', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2}} {soc_cart>currency}" class="strikethroughPrice sapUiTinyMarginEnd"/>
+                                        <Text text="was" class="promoSubText"/>
+                                    </HBox>
+                                    <!-- New Net Price displayed as per % discount -->
+                                    <HBox alignItems="Center" class="sapUiTinyMarginTop">
+                                        <ObjectStatus text="{path:'soc_cart>itemPrice', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2}} {soc_cart>currency}" state="Success" class="boldNetPriceHighlight"/>
+                                    </HBox>
+                                </VBox>
+                                <!-- 11. Promotion Applied -->
+                                <VBox justifyContent="Center" visible="{=!${soc_cart>isNotebookBasic17}}">
+                                    <ObjectStatus text="{= ${soc_cart>hasPromo} ? (${soc_cart>promoName} + ' (' + ${soc_cart>promoCode} + ')') : '-'}" state="{= ${soc_cart>hasPromo} ? 'Success' : 'None'}"/>
+                                    <Text text="{soc_cart>promoType}" visible="{= !!${soc_cart>hasPromo}}" class="promoTypeSubText sapUiTinyMarginTop"/>
+                                </VBox>
+                                <VBox justifyContent="Center" visible="{soc_cart>isNotebookBasic17}" class="notebookPromoCard">
+                                    <HBox alignItems="Center">
+                                        <sap.ui.core:Icon src="sap-icon://badge" size="0.9rem" color="#16a34a" class="sapUiTinyMarginEnd"/>
+                                        <ObjectStatus text="{soc_cart>promoName} ({soc_cart>promoCode})" state="Success" class="notebookPromoBadgeTitle"/>
+                                    </HBox>
+                                    <Text text="{soc_cart>promoType}" class="notebookPromoBadgeSub sapUiTinyMarginTop"/>
+                                    <HBox alignItems="Center" class="sapUiTinyMarginTop">
+                                        <Text text="Special Offer (50% OFF)" class="notebookPromoOfferPill"/>
+                                    </HBox>
+                                </VBox>
+                                <!-- 12. Sales Person ID -->
+                                <Input value="{soc_cart>salesPersonId}"/>
+                                <!-- 13. Site -->
+                                <Text text="{soc_cart>site}"/>
+                                <!-- 14. Item Category -->
+                                <Input value="{soc_cart>itemCategory}" valueHelpRequest=".onItemCategory" showValueHelp="true"/>
+                                <!-- 15. Extended Guarantee Product -->
+                                <Text text="{soc_cart>extendedGuaranteeProduct}"/>
+                                <!-- 16. Rej. Reason -->
+                                <Select selectedKey="{soc_cart>rejReason}" width="100%">
+                                    <sap.ui.core:Item key="" text="-- None --"/>
+                                    <sap.ui.core:Item key="01" text="01 - Cancelled"/>
+                                    <sap.ui.core:Item key="02" text="02 - Not Available"/>
+                                    <sap.ui.core:Item key="03" text="03 - Replaced"/>
+                                </Select>
+                                <!-- Action (Remove) -->
+                                <Button id="SOC_REMOVE" press=".removeItem" type="Transparent" icon="sap-icon://sys-cancel" class="sapMLIBSelectD" tooltip="Remove item"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+
+            <!-- Tab 2: Conditions Table (SAP Condition Technique Breakdown) -->
+            <ScrollContainer horizontal="true" vertical="false" width="100%" visible="{=${soc_cart1>/activeTab} === 'conditions'}">
+                <Table id="SOC_CONDITIONS_LIST" inset="true" width="100%"
+                    items="{soc_cart1>/conditions}">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="Pricing Conditions (Condition Technique)" level="H2" class="sapUiSmallMarginEnd"/>
+                            <Button text="Sales Items"
+                                type="{=${soc_cart1>/activeTab} === 'sales' ? 'Emphasized' : 'Default'}"
+                                press=".onPressSalesTab"
+                                class="sapUiTinyMarginEnd"/>
+                            <Button text="Conditions (Pricing)"
+                                type="{=${soc_cart1>/activeTab} === 'conditions' ? 'Emphasized' : 'Default'}"
+                                press=".onPressConditionsTab"/>
+                            <ToolbarSpacer/>
+                            <Button id="btnAddCondition" text="Add Condition" icon="sap-icon://add" type="Emphasized" press=".onAddCondition"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <!-- 1. Item Number -->
+                        <Column hAlign="Left" width="6rem">
+                            <header><Text text="Item" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 2. Condition Type -->
+                        <Column hAlign="Left" width="8rem">
+                            <header><Text text="Cond. Type" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 3. Description -->
+                        <Column hAlign="Left" width="18rem">
+                            <header><Text text="Description" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 4. Rate / Amount -->
+                        <Column hAlign="Left" width="10rem">
+                            <header><Text text="Rate / Scale" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 5. Per -->
+                        <Column hAlign="Left" width="7rem">
+                            <header><Text text="Per" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 6. Condition Value -->
+                        <Column hAlign="Left" width="10rem">
+                            <header><Text text="Condition Value" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 7. Category -->
+                        <Column hAlign="Left" width="10rem">
+                            <header><Text text="Category" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- 8. Status -->
+                        <Column hAlign="Left" width="8rem">
+                            <header><Text text="Status" textAlign="Left" width="100%"/></header>
+                        </Column>
+                        <!-- Action (Delete) -->
+                        <Column hAlign="Center" width="4rem">
+                            <header><Text text=""/></header>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <!-- 1. Item -->
+                                <Text text="{soc_cart1>itemNumber}"/>
+                                <!-- 2. Condition Type -->
+                                <ObjectIdentifier title="{soc_cart1>conditionType}"/>
+                                <!-- 3. Description -->
+                                <Text text="{soc_cart1>conditionDesc}"/>
+                                <!-- 4. Rate -->
+                                <Text text="{soc_cart1>rate}"/>
+                                <!-- 5. Per -->
+                                <Text text="{soc_cart1>per}"/>
+                                <!-- 6. Value -->
+                                <Text text="{soc_cart1>value}"/>
+                                <!-- 7. Category -->
+                                <Text text="{soc_cart1>category}"/>
+                                <!-- 8. Status -->
+                                <ObjectStatus text="{soc_cart1>status}" state="{= ${soc_cart1>status} === 'Applied' ? 'Success' : 'None'}"/>
+                                <!-- Action -->
+                                <Button icon="sap-icon://delete" type="Transparent" press=".onRemoveCondition" tooltip="Remove condition"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+
+        </content>
+        <footer>
+            <Bar>
+                <contentLeft>
+                    <Button text="{i18n>CONTINUE_SHOPPING}" icon="sap-icon://nav-back" press=".onNavigateHome" />
+                </contentLeft>
+                <contentRight>
+                    <Button text="Proceed to Checkout" type="Emphasized" icon="sap-icon://cart-approval" press=".onATPCheck" />
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</sap.ui.core:View>

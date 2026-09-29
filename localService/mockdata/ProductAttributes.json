@@ -1,0 +1,42 @@
+[
+  {
+    "ProductID": "HT-1000",
+    "CustomerNo": "1000",
+    "Characteristic": "COLOR",
+    "CharactDescr": "Color",
+    "ValueChar": "Silver",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00"
+  },
+  {
+    "ProductID": "HT-1000",
+    "CustomerNo": "1000",
+    "Characteristic": "SCREEN_SIZE",
+    "CharactDescr": "Screen Size",
+    "ValueChar": "15.6 inch",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00"
+  },
+  {
+    "ProductID": "HT-1001",
+    "CustomerNo": "1000",
+    "Characteristic": "COLOR",
+    "CharactDescr": "Color",
+    "ValueChar": "Space Gray",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00"
+  },
+  {
+    "ProductID": "HT-1001",
+    "CustomerNo": "1000",
+    "Characteristic": "SCREEN_SIZE",
+    "CharactDescr": "Screen Size",
+    "ValueChar": "17.0 inch",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00"
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "CustomerID": "1000",
+    "CustomerName": "TechCorp Solutions",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00",
+    "SalesOrganizationName": "Sales Org 1000",
+    "DistributionChannelName": "Direct Sales",
+    "DivisionName": "Cross Division",
+    "City": "New York",
+    "PostalCode": "10001",
+    "CityZip": "New York / 10001",
+    "Currency": "ZAR",
+    "ShipToAccountNo": "SHIP1000",
+    "ShipToIncoTerms": "FOB",
+    "ShipToInstructions": "Deliver to receiving dock B during business hours.",
+    "ShipToReceiverNotes": "Authorized receiver: John Smith",
+    "ShipToCarrier": "FEDEX"
+  },
+  {
+    "CustomerID": "2000",
+    "CustomerName": "Global Logistics Ltd",
+    "SalesOrganization": "1000",
+    "DistributionChannel": "10",
+    "Division": "00",
+    "SalesOrganizationName": "Sales Org 1000",
+    "DistributionChannelName": "Direct Sales",
+    "DivisionName": "Cross Division",
+    "City": "Frankfurt",
+    "PostalCode": "60311",
+    "CityZip": "Frankfurt / 60311",
+    "Currency": "EUR",
+    "ShipToAccountNo": "SHIP2000",
+    "ShipToIncoTerms": "DDP",
+    "ShipToInstructions": "Forklift required at offloading.",
+    "ShipToReceiverNotes": "Authorized receiver: Klaus Weber",
+    "ShipToCarrier": "DHL"
+  }
+]

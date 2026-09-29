@@ -1,0 +1,17 @@
+.soc-table-elem-align{
+	display:inline-block;
+	padding-top:.3rem;
+}
+
+.soc-checkbox-elem-align{
+	margin-top:-.5rem;
+	padding:0;
+}
+
+.soc-quantity-align{
+	padding-left:.2rem;
+}
+
+.soc-table-label-elem-align{
+	margin-top:.1rem;
+}

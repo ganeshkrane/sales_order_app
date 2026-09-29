@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Sales Orders - SAP Fiori</title>
+    <meta name="description" content="SAPUI5 Create Sales Orders (F0018) application running with local mock JSON dataset." />
+    <meta property="og:title" content="Create Sales Orders - SAP Fiori" />
+    <meta property="og:description" content="SAPUI5 Create Sales Orders (F0018) application running with local mock JSON dataset." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f7f9fa;
+            font-family: "72", Arial, Helvetica, sans-serif;
+        }
+        #content {
+            height: 100%;
+            width: 100%;
+        }
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f7f9fa;
+            z-index: 99999;
+            transition: opacity 0.3s ease;
+        }
+        .sap-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e5e9ec;
+            border-top: 4px solid #0a6ed1;
+            border-radius: 50%;
+            animation: sap-spin 0.8s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes sap-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .sap-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #32363a;
+            margin-bottom: 8px;
+        }
+        .sap-subtitle {
+            font-size: 13px;
+            color: #6a6d70;
+        }
+        .sap-badge {
+            margin-top: 14px;
+            padding: 4px 10px;
+            background: #e8f3fd;
+            color: #0854a0;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
+
+    <!-- Shim sap.ushell.Container for standalone preview environments to support Personalization service used by sap.ca.ui.CustomerContext -->
+    <script>
+        window.sap = window.sap || {};
+        window.sap.ushell = window.sap.ushell || {};
+        if (!window.sap.ushell.Container) {
+            window.sap.ushell.Container = {
+                getService: function(sServiceName) {
+                    if (sServiceName === "Personalization") {
+                        return {
+                            getPersonalizer: function(oConf) {
+                                var sContainer = (oConf && oConf.container) || "default";
+                                var sItem = (oConf && oConf.item) || "default";
+                                var sStorageKey = "sap.ushell.personalization." + sContainer + "." + sItem;
+                                return {
+                                    getPersData: function() {
+                                        var oDeferred = (window.jQuery && jQuery.Deferred) ? jQuery.Deferred() : null;
+                                        var sVal = "";
+                                        try {
+                                            if (window.localStorage) {
+                                                sVal = window.localStorage.getItem(sStorageKey) || "";
+                                            }
+                                        } catch (e) {}
+                                        if (oDeferred) {
+                                            oDeferred.resolve(sVal);
+                                            return oDeferred.promise();
+                                        }
+                                        return Promise.resolve(sVal);
+                                    },
+                                    setPersData: function(sData) {
+                                        var oDeferred = (window.jQuery && jQuery.Deferred) ? jQuery.Deferred() : null;
+                                        try {
+                                            if (window.localStorage) {
+                                                window.localStorage.setItem(sStorageKey, sData || "");
+                                            }
+                                        } catch (e) {}
+                                        if (oDeferred) {
+                                            oDeferred.resolve();
+                                            return oDeferred.promise();
+                                        }
+                                        return Promise.resolve();
+                                    },
+                                    delPersData: function() {
+                                        var oDeferred = (window.jQuery && jQuery.Deferred) ? jQuery.Deferred() : null;
+                                        try {
+                                            if (window.localStorage) {
+                                                window.localStorage.removeItem(sStorageKey);
+                                            }
+                                        } catch (e) {}
+                                        if (oDeferred) {
+                                            oDeferred.resolve();
+                                            return oDeferred.promise();
+                                        }
+                                        return Promise.resolve();
+                                    }
+                                };
+                            }
+                        };
+                    }
+                    return null;
+                },
+                getServiceAsync: function(sServiceName) {
+                    return Promise.resolve(this.getService(sServiceName));
+                }
+            };
+        }
+    </script>
+
+    <!-- SAPUI5 Bootstrap using SAP Fiori 3 theme and Wave 2 scaffolding -->
+    <script id="sap-ui-bootstrap"
+        src="https://ui5.sap.com/1.71.85/resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_fiori_3"
+        data-sap-ui-libs="sap.m, sap.ca.scfld.md, sap.ca.ui, sap.me"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-async="true"
+        data-sap-ui-preload="async"
+        data-sap-ui-resourceroots='{
+            "cus.sd.zsalesorder.create": "./"
+        }'
+        data-sap-ui-frameOptions="allow"
+        data-sap-ui-xx-bindingSyntax="complex">
+    </script>
+
+    <script>
+        window.addEventListener("load", function() {
+            if (typeof sap !== "undefined") {
+                sap.ui.getCore().attachInit(function () {
+                    sap.ui.require([
+                        "sap/ui/core/util/MockServer",
+                        "sap/ui/core/ComponentContainer"
+                    ], function (MockServer, ComponentContainer) {
+                        try {
+                            // Configure and start MockServer for OData service
+                            var oMockServer = new MockServer({
+                                rootUri: "/sap/opu/odata/sap/ZSRA017_SALESORDER_CREATE_SRV/"
+                            });
+
+                            // Simulate OData metadata & mock JSON dataset
+                            oMockServer.simulate("./localService/metadata.xml", {
+                                sMockdataBaseUrl: "./localService/mockdata/",
+                                bGenerateMissingMockData: true
+                            });
+
+                            oMockServer.start();
+                            console.log("[SAPUI5] Mock Server active with local JSON files.");
+                        } catch (err) {
+                            console.warn("[SAPUI5] Client MockServer init note:", err);
+                        }
+
+                        // Instantiate and mount the SAPUI5 Component
+                        new ComponentContainer({
+                            name: "cus.sd.zsalesorder.create",
+                            manifest: false,
+                            settings: {
+                                id: "cus.sd.zsalesorder.create"
+                            },
+                            height: "100%",
+                            width: "100%"
+                        }).placeAt("content");
+
+                        // Smoothly dismiss loading screen
+                        var loader = document.getElementById("loading-screen");
+                        if (loader) {
+                            setTimeout(function() {
+                                loader.style.opacity = "0";
+                                setTimeout(function() {
+                                    if (loader.parentNode) {
+                                        loader.parentNode.removeChild(loader);
+                                    }
+                                }, 300);
+                            }, 500);
+                        }
+                    });
+                });
+            } else {
+                console.error("[SAPUI5] Unable to load SAPUI5 CDN scripts.");
+                var loader = document.getElementById("loading-screen");
+                if (loader) {
+                    loader.innerHTML = '<div style="color: #bb0000; font-weight: 500;">Failed to stream SAPUI5 resources from CDN. Please check network.</div>';
+                }
+            }
+        });
+    </script>
+</head>
+<body class="sapUiBody sapUiSizeCompact" id="content">
+    <div id="loading-screen">
+        <div class="sap-spinner"></div>
+        <div class="sap-title">Create Sales Orders</div>
+        <div class="sap-subtitle">SAPUI5 Application (F0018)</div>
+        <div class="sap-badge">Loading local JSON mock data...</div>
+    </div>
+</body>
+</html>

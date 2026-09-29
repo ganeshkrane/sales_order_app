@@ -1,0 +1,187 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<sap.ui.core:View xmlns="sap.m" xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core"
+	controllerName="cus.sd.zsalesorder.create.view.SalesOrderReviewCart">
+	<Page id="SOC_REVIEW_PAGE" class="sapUiFioriObjectPage">
+		<content>
+			<form:SimpleForm editable="false" maxContainerCols="2"
+				minWidth="1024" labelMinWidth="172px">
+				<form:content>
+					<sap.ui.core:Title text="{i18n>SHIPPING_DETAILS}" />
+					<Label text="{i18n>SHIP_TO_LABEL}">
+					</Label>
+					<Text text="{soc_cart>/FormattedAddress1}" width="290px"
+						maxLines="0">
+					</Text>
+					<Label>
+					</Label>
+					<Text id="address" width="290px" maxLines="0">
+					</Text>
+					<Label text="{i18n>Payee_LABEL}">
+					</Label>
+					<Text text="{soc_cart>/payeeDesc}" width="290px" maxLines="0">
+					</Text>
+					<Label text="{i18n>PHONE_NUMBER}">
+					</Label>
+					<Text text="{soc_cart>/PhoneNumber}" width="290px" maxLines="0">
+					</Text>
+					<Label text="{i18n>REQUESTED_DELIVERY}">
+					</Label>
+					<Text id="SOC_REVIEW_SINGLERDD"
+						text="{path: 'soc_cart>/singleRdd', type:'sap.ca.ui.model.type.Date', formatOptions:{source:{pattern:'yyyyMMdd'},style:'medium'}}">
+					</Text>
+					<Label text="{i18n>SINGLE_SHIPMENT}">
+					</Label>
+					<Text
+						text="{path: 'soc_cart>/SingleShipment', formatter:'.booleanFormatter'}"
+						maxLines="0">
+					</Text>
+					<Label text="{i18n>CARRIER}">
+					</Label>
+					<Text text="{soc_cart>/ShipToCarrier}" width="291px" maxLines="0">
+					</Text>
+					<Label text="{i18n>SHIPPING}">
+					</Label>
+					<ObjectNumber
+						number="{path: 'soc_cart>/Freight', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"
+						unit="{soc_cart>/Currency}">
+					</ObjectNumber>
+					<Label text="{i18n>INCOTERMS}">
+					</Label>
+					<Text text="{soc_cart>/ShipToIncoTerms}" width="292px"
+						maxLines="0">
+					</Text>
+					<Label text="{i18n>SHIPPING_INSTRUCTIONS}">
+					</Label>
+					<Text text="{soc_cart>/ShippingInstructions}" width="290px"
+						maxLines="0">
+					</Text>
+					<Label text="{i18n>NOTES_TO_RECEIVER}">
+					</Label>
+					<Text text="{soc_cart>/NotesToReceiver}" width="290px"
+						maxLines="0">
+					</Text>
+					<sap.ui.core:Title text="{i18n>ORDER_DETAILS}" />
+					<Label text="{i18n>SOLD_TO}">
+					</Label>
+					<Text text="{soc_cart>/CustomerName}" maxLines="0">
+					</Text>
+					<Label text="{i18n>PURCHASE_ORDER}">
+					</Label>
+					<Text text="{soc_cart>/PurchaseOrder}" width="291px" maxLines="0">
+					</Text>
+					<Label text="{i18n>TOTAL}">
+					</Label>
+					<ObjectNumber
+						number="{path: 'soc_cart>/TotalAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"
+						unit="{soc_cart>/Currency}">
+					</ObjectNumber>
+					<Label text="{i18n>TAX}">
+					</Label>
+					<ObjectNumber
+						number="{path: 'soc_cart>/Tax', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"
+						unit="{soc_cart>/Currency}">
+					</ObjectNumber>
+					<!-- Extension point for Review Cart screen let you add new field in the form section-->
+					<sap.ui.core:ExtensionPoint name="extReviewOrderCostDetails" />
+					<Label text="{i18n>GRAND_TOTAL}">
+					</Label>
+					<ObjectNumber
+						number="{path: 'soc_cart>/GrandTotal', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"
+						unit="{soc_cart>/Currency}">
+					</ObjectNumber>
+					<Label text="{i18n>Sales_Order_Type}"/>
+					<Text text="{soc_cart>/SalesOrdTypeDesc}" width="291px" maxLines="0"></Text>
+				</form:content>
+			</form:SimpleForm>
+			<Table id="items" inset="true"
+				headerText="{parts:[{path:'i18n>SO_ITM_ORD_ITMS'},{path:'soc_cart>/itemCount'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}"
+				growing="true" growingThreshold="30" growingScrollToLoad="true"
+				items="{soc_cart>/oShoppingCartItems}">
+				<items>
+					<ColumnListItem unread="true" counter="0">
+						<cells>
+							<ObjectIdentifier id="SOC_PRODUCT_NO" text="{soc_cart>ProductID}"
+								visible="{soc_cart>isVisible}">
+							</ObjectIdentifier>
+							<Label text="{parts:[{path:'soc_cart>qty'}, {path:'soc_cart>UnitofMeasureTxt'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.formatQuantityUnitofMeasure'}"></Label>
+							<Label id="SOC_REVIEW_RDD"
+								text="{path : 'soc_cart>RDD', type:'sap.ca.ui.model.type.Date', formatOptions: {source:{pattern:'yyyyMMdd'}, sytle:'medium'}}"
+								visible="{soc_cart>isVisible}"></Label>
+							<ObjectStatus id="SOC_AVAILABLE_QTY" text="{soc_cart>AvailQuantity}"
+								state="{soc_cart>AvailableQuantityStatus}"></ObjectStatus>
+							<ObjectStatus id="SOC_ESTIMATED_DATE" text="{soc_cart>EstimatedDelivery}"
+								state="{soc_cart>EstimatedDeliveryStatus}"></ObjectStatus>
+							<ObjectNumber id="SOC_FINAL_PRICE"
+								number="{path: 'soc_cart>FinalPrice', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"></ObjectNumber>
+							<ObjectNumber id="SOC_NET_AMOUNT"
+								number="{path: 'soc_cart>NetAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"></ObjectNumber>
+								<!-- Extension point for table column value let you add new field table -->
+							<sap.ui.core:ExtensionPoint name="extSOCCartTableColumnValue" />
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column hAlign="Left">
+						<header>
+							<Text text="{i18n>PRODUCT_NO}" textAlign="Left" width="100%"
+								maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Right" minScreenWidth="tablet" demandPopin="true">
+						<header>
+							<Text text="{i18n>QUANTITY}" textAlign="Left" width="100%"
+								maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="tablet" demandPopin="true">
+						<header>
+							<Text text="{i18n>REQUESTED_DELIVERY}" textAlign="Left"
+								width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="400px" demandPopin="true">
+						<header>
+							<Text text="{i18n>AVAILABLE_QUANTITY}" textAlign="Left"
+								width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left">
+						<header>
+							<Text text="{i18n>ESTIMATED_DELIVERY}" textAlign="Left"
+								width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Right" minScreenWidth="tablet" demandPopin="true">
+						<header>
+							<Text
+								text="{parts:[{path:'i18n>FINAL_PRICE'},{path:'soc_cart>/Currency'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}"
+								textAlign="Right" width="100%" maxLines="0"></Text>
+						</header>
+						<footer>
+							<Label text="{i18n>TOTAL}" textAlign="Left" width="100%"></Label>
+						</footer>
+					</Column>
+					<Column width="20%" hAlign="Right">
+						<header>
+							<Text
+								text="{parts:[{path:'i18n>SUB_TOTAL_CUR'},{path:'soc_cart>/Currency'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}"
+								textAlign="Right" width="100%" maxLines="0"></Text>
+						</header>
+						<footer>
+							<ObjectNumber
+								number="{path: 'soc_cart>/TotalAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"></ObjectNumber>
+						</footer>
+					</Column>
+					<!-- Extension point for table column header let you add new column(name) in table -->
+					<sap.ui.core:ExtensionPoint name="extSOCCartTableColumnHeader" />
+				</columns>
+			</Table>
+		</content>
+		
+	</Page>
+</sap.ui.core:View>

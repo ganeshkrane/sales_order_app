@@ -1,0 +1,279 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+<edmx:DataServices m:DataServiceVersion="2.0">
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="SRA017_SALESORDER_CREATE_SRV" xml:lang="en" sap:schema-version="1">
+<EntityType Name="PartnerAddress" sap:content-version="1">
+<Key>
+<PropertyRef Name="PartnerID"/>
+<PropertyRef Name="CustomerID"/>
+</Key>
+<Property Name="FormattedAddress5" Type="Edm.String" sap:label="Formatted Address Line 5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress6" Type="Edm.String" sap:label="Formatted Address Line 6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress7" Type="Edm.String" sap:label="Formatted Address Line 7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress8" Type="Edm.String" sap:label="Formatted Address Line 8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress9" Type="Edm.String" sap:label="Formatted Address Line 9" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PartnerID" Type="Edm.String" Nullable="false" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Partner ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Division" Type="Edm.String" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PartnerType" Type="Edm.String" sap:label="Partner Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PartnerName" Type="Edm.String" sap:label="Partner Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress2" Type="Edm.String" sap:label="Formatted Address Line 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToAddress1" Type="Edm.String" MaxLength="35" sap:label="Ship to Address Line 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SalesOrganization" Type="Edm.String" sap:label="Sales Organization" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToRegionName" Type="Edm.String" sap:label="Ship to Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PartnerName2" Type="Edm.String" sap:label="Partner Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToCountryName" Type="Edm.String" sap:label="Ship to Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress3" Type="Edm.String" sap:label="Formatted Address Line 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToAddress2" Type="Edm.String" MaxLength="35" sap:label="Ship to Address Line 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToCity" Type="Edm.String" MaxLength="35" sap:label="Ship to City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToCountryCode" Type="Edm.String" MaxLength="3" sap:label="Ship to Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToRegionCode" Type="Edm.String" MaxLength="3" sap:label="Ship to Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToPostalCode" Type="Edm.String" MaxLength="10" sap:label="Ship to Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToTelephone" Type="Edm.String" MaxLength="16" sap:label="Ship to Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DistributionChannel" Type="Edm.String" sap:label="Distribution Channel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress4" Type="Edm.String" sap:label="Formatted Address Line 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress1" Type="Edm.String" sap:label="Formatted Address Line 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="Customer" sap:content-version="1">
+<Key>
+<PropertyRef Name="CustomerID"/>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="DistributionChannel"/>
+<PropertyRef Name="Division"/>
+</Key>
+<Property Name="ShipToAccountNo" Type="Edm.String" sap:label="Ship to Account number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToIncoTerms" Type="Edm.String" sap:label="Ship to Incoterms" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToInstructions" Type="Edm.String" MaxLength="132" sap:label="Ship to Instructions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CityZip" Type="Edm.String" MaxLength="51" sap:label="City/Zip" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToReceiverNotes" Type="Edm.String" MaxLength="132" sap:label="Ship to Receiver notes" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="City" Type="Edm.String" MaxLength="40" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SalesOrganizationName" Type="Edm.String" MaxLength="20" sap:label="SalesOrganizationName" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DistributionChannelName" Type="Edm.String" MaxLength="20" sap:label="DistributionChannelName" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DivisionName" Type="Edm.String" MaxLength="20" sap:label="DviisionName" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="10" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Customer Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CustomerName" Type="Edm.String" MaxLength="35" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Organization" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Distribution Channel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToCarrier" Type="Edm.String" sap:label="Ship to Carrier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="PartnerAddressSet" Relationship="SRA017_SALESORDER_CREATE_SRV.CustomerPartnerAddress" FromRole="FromRole_CustomerPartnerAddress" ToRole="ToRole_CustomerPartnerAddress"/>
+<NavigationProperty Name="SalesOrderSet" Relationship="SRA017_SALESORDER_CREATE_SRV.CustomerSalesOrder" FromRole="FromRole_CustomerSalesOrder" ToRole="ToRole_CustomerSalesOrder"/>
+</EntityType>
+<EntityType Name="Product" sap:content-version="1">
+<Key>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="DistributionChannel"/>
+<PropertyRef Name="Division"/>
+<PropertyRef Name="ProductID"/>
+<PropertyRef Name="CustomerNo"/>
+</Key>
+<Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Organization" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Distribution Channel" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="CustomerProductNo" Type="Edm.String" MaxLength="35" sap:label="Customer Product Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ProductReferenceNo" Type="Edm.String" MaxLength="18" sap:label="Product Reference Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ImageFlag" Type="Edm.Boolean" sap:label="Flag for image" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="NetPrice" Type="Edm.Decimal" Precision="23" Scale="2" sap:label="Net Price" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ProductID" Type="Edm.String" Nullable="false" MaxLength="18" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Product No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ProductDesc" Type="Edm.String" MaxLength="40" sap:label="Product Descriptiion" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CustomerNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UOM" Type="Edm.String" MaxLength="3" sap:label="Unit of Measure" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UOMDesc" Type="Edm.String" MaxLength="30" sap:label="Unit of Measure Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="ProductAttributes" Relationship="SRA017_SALESORDER_CREATE_SRV.ProductProductAttribute" FromRole="FromRole_ProductProductAttribute" ToRole="ToRole_ProductProductAttribute"/>
+</EntityType>
+<EntityType Name="ProductImage" m:HasStream="true" sap:content-version="1">
+<Key>
+<PropertyRef Name="ProductID"/>
+</Key>
+<Property Name="ProductID" Type="Edm.String" Nullable="false" MaxLength="18" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Product ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MimeType" Type="Edm.String" MaxLength="128" sap:label="Mime Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="SalesOrder" sap:content-version="1">
+<Key>
+<PropertyRef Name="SalesOrderNumber"/>
+</Key>
+<Property Name="ShipToPartnerName" Type="Edm.String" MaxLength="35" sap:label="Ship to Partner Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SalesOrderSimulation" Type="Edm.Boolean" sap:label="Sales Order Simulation" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SingleShipment" Type="Edm.Boolean" sap:label="Single Shipment" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="OrderItemCount" Type="Edm.Int16" sap:label="OrderItemCoun" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToCity" Type="Edm.String" Nullable="false" sap:label="Ship to City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SalesOrderNumber" Type="Edm.String" Nullable="false" MaxLength="10" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Sales Order No." sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PO" Type="Edm.String" MaxLength="35" sap:label="Purchase Order" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToPartnerID" Type="Edm.String" MaxLength="10" sap:label="Ship to Partner ID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToContact" Type="Edm.String" sap:label="Ship to Contact" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShippingCarrier" Type="Edm.String" Nullable="false" sap:label="Shipping Carrier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShippingIncoTerms" Type="Edm.String" Nullable="false" sap:label="Shipping Inco Terms" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+<Property Name="ShipToPostalCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Ship to postal code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress1" Type="Edm.String" sap:label="Formatted Address Line 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToRegion" Type="Edm.String" Nullable="false" sap:label="Ship to Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipmentInstruction" Type="Edm.String" MaxLength="132" sap:label="Shipment Instructions" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RequestedDate" Type="Edm.String" MaxLength="8" sap:label="Requested Date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PaymentTerms" Type="Edm.String" MaxLength="3" sap:label="Payment Terms" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PromotionCode" Type="Edm.String" sap:label="Promotion Code" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer Number" sap:updatable="false" sap:sortable="false"/>
+<Property Name="CustomerName" Type="Edm.String" MaxLength="35" sap:label="Customer Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress9" Type="Edm.String" sap:label="Formatted Address Line 9" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Tax" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Tax" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Freight" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Freight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress8" Type="Edm.String" sap:label="Formatted Address Line 8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="GrandTotal" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Grand Total" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToAddressLine1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Ship to Address Line 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToCountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Ship to Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress7" Type="Edm.String" sap:label="Formatted Address Line 7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="TotalAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Total Amount" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress2" Type="Edm.String" sap:label="Formatted Address Line 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress3" Type="Edm.String" sap:label="Formatted Address Line 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress6" Type="Edm.String" sap:label="Formatted Address Line 6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress4" Type="Edm.String" sap:label="Formatted Address Line 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FormattedAddress5" Type="Edm.String" sap:label="Formatted Address Line 5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="NotesToReceiver" Type="Edm.String" MaxLength="132" sap:label="Notes To Receiver" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Organization" sap:updatable="false" sap:sortable="false"/>
+<Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Distribution Channel" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Division" sap:updatable="false" sap:sortable="false"/>
+<Property Name="OrderDate" Type="Edm.String" MaxLength="8" sap:label="Order Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ShipToAddressLine2" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Ship to Address Line 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="OrderItemSet" Relationship="SRA017_SALESORDER_CREATE_SRV.SalesOrderOrderItem" FromRole="FromRole_SalesOrderOrderItem" ToRole="ToRole_SalesOrderOrderItem"/>
+</EntityType>
+<EntityType Name="ProductAttribute" sap:content-version="1">
+<Key>
+<PropertyRef Name="ProductID"/>
+<PropertyRef Name="CustomerNo"/>
+<PropertyRef Name="Characteristic"/>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="DistributionChannel"/>
+<PropertyRef Name="Division"/>
+</Key>
+<Property Name="ProductID" Type="Edm.String" Nullable="false" MaxLength="18" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Product ID" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="CustomerNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer Number" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Characteristic" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Characteristics ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CharactDescr" Type="Edm.String" MaxLength="30" sap:label="Characteristics Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ValueChar" Type="Edm.String" MaxLength="30" sap:label="Characteristics Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Organization" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Distribution Channel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="OrderItem" sap:content-version="1">
+<Key>
+<PropertyRef Name="SalesOrderNumber"/>
+<PropertyRef Name="ItemNumber"/>
+</Key>
+<Property Name="UnitofMeasureTxt" Type="Edm.String" MaxLength="10" sap:label="Sales Unit Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ProductName" Type="Edm.String" sap:label="Product Name" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MaterialNumber" Type="Edm.String" MaxLength="18" sap:label="Material Number" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Quantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="UnitofMeasure" sap:label="Order quantity" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UnitofMeasure" Type="Edm.String" MaxLength="3" sap:label="Sales unit" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="NetAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Net Amount" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ImageFlag" Type="Edm.Boolean" sap:label="Image Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RequestedDeliveryDate" Type="Edm.String" MaxLength="8" sap:label="Requested Delivery" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="EstimatedDeliveryDate" Type="Edm.String" MaxLength="8" sap:label="Estimated Delivery" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AvailableQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="UnitofMeasure" sap:label="Available Quantity" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FinalPrice" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Unit Price" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Product" Type="Edm.String" MaxLength="18" sap:label="Product" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="SalesOrderNumber" Type="Edm.String" Nullable="false" MaxLength="10" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Sales Order Number" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ItemNumber" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item Number" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Currency" Type="Edm.String" MaxLength="3" sap:label="Currency" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+<Property Name="DeliveryStatusCode" Type="Edm.String" MaxLength="1" sap:label="Delivery Status Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="QuantityStatusCode" Type="Edm.String" MaxLength="1" sap:label="Quantity Status Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<Association Name="CustomerPartnerAddress" sap:content-version="1">
+<End Type="SRA017_SALESORDER_CREATE_SRV.Customer" Multiplicity="1" Role="FromRole_CustomerPartnerAddress"/>
+<End Type="SRA017_SALESORDER_CREATE_SRV.PartnerAddress" Multiplicity="*" Role="ToRole_CustomerPartnerAddress"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CustomerPartnerAddress">
+<PropertyRef Name="CustomerID"/>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="Division"/>
+<PropertyRef Name="DistributionChannel"/>
+</Principal>
+<Dependent Role="ToRole_CustomerPartnerAddress">
+<PropertyRef Name="CustomerID"/>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="Division"/>
+<PropertyRef Name="DistributionChannel"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CustomerSalesOrder" sap:content-version="1">
+<End Type="SRA017_SALESORDER_CREATE_SRV.Customer" Multiplicity="1" Role="FromRole_CustomerSalesOrder"/>
+<End Type="SRA017_SALESORDER_CREATE_SRV.SalesOrder" Multiplicity="*" Role="ToRole_CustomerSalesOrder"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CustomerSalesOrder">
+<PropertyRef Name="Division"/>
+<PropertyRef Name="DistributionChannel"/>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="CustomerID"/>
+</Principal>
+<Dependent Role="ToRole_CustomerSalesOrder">
+<PropertyRef Name="Division"/>
+<PropertyRef Name="DistributionChannel"/>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="CustomerID"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="SalesOrderOrderItem" sap:content-version="1">
+<End Type="SRA017_SALESORDER_CREATE_SRV.SalesOrder" Multiplicity="1" Role="FromRole_SalesOrderOrderItem"/>
+<End Type="SRA017_SALESORDER_CREATE_SRV.OrderItem" Multiplicity="*" Role="ToRole_SalesOrderOrderItem"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_SalesOrderOrderItem">
+<PropertyRef Name="SalesOrderNumber"/>
+</Principal>
+<Dependent Role="ToRole_SalesOrderOrderItem">
+<PropertyRef Name="SalesOrderNumber"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="ProductProductAttribute" sap:content-version="1">
+<End Type="SRA017_SALESORDER_CREATE_SRV.Product" Multiplicity="1" Role="FromRole_ProductProductAttribute"/>
+<End Type="SRA017_SALESORDER_CREATE_SRV.ProductAttribute" Multiplicity="*" Role="ToRole_ProductProductAttribute"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_ProductProductAttribute">
+<PropertyRef Name="CustomerNo"/>
+<PropertyRef Name="ProductID"/>
+<PropertyRef Name="Division"/>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="DistributionChannel"/>
+</Principal>
+<Dependent Role="ToRole_ProductProductAttribute">
+<PropertyRef Name="CustomerNo"/>
+<PropertyRef Name="ProductID"/>
+<PropertyRef Name="Division"/>
+<PropertyRef Name="SalesOrganization"/>
+<PropertyRef Name="DistributionChannel"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<EntityContainer Name="SRA017_SALESORDER_CREATE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+<EntitySet Name="PartnerAddresses" EntityType="SRA017_SALESORDER_CREATE_SRV.PartnerAddress" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="Customers" EntityType="SRA017_SALESORDER_CREATE_SRV.Customer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="Products" EntityType="SRA017_SALESORDER_CREATE_SRV.Product" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="ProductImages" EntityType="SRA017_SALESORDER_CREATE_SRV.ProductImage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="SalesOrders" EntityType="SRA017_SALESORDER_CREATE_SRV.SalesOrder" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="ProductAttributes" EntityType="SRA017_SALESORDER_CREATE_SRV.ProductAttribute" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="OrderItems" EntityType="SRA017_SALESORDER_CREATE_SRV.OrderItem" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<AssociationSet Name="CustomerPartnerAddressSet" Association="SRA017_SALESORDER_CREATE_SRV.CustomerPartnerAddress" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Customers" Role="FromRole_CustomerPartnerAddress"/>
+<End EntitySet="PartnerAddresses" Role="ToRole_CustomerPartnerAddress"/>
+</AssociationSet>
+<AssociationSet Name="ProductProductAttributeSet" Association="SRA017_SALESORDER_CREATE_SRV.ProductProductAttribute" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Products" Role="FromRole_ProductProductAttribute"/>
+<End EntitySet="ProductAttributes" Role="ToRole_ProductProductAttribute"/>
+</AssociationSet>
+<AssociationSet Name="SalesOrderOrderItemSet" Association="SRA017_SALESORDER_CREATE_SRV.SalesOrderOrderItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="SalesOrders" Role="FromRole_SalesOrderOrderItem"/>
+<End EntitySet="OrderItems" Role="ToRole_SalesOrderOrderItem"/>
+</AssociationSet>
+<AssociationSet Name="CustomerSalesOrderSet" Association="SRA017_SALESORDER_CREATE_SRV.CustomerSalesOrder" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="Customers" Role="FromRole_CustomerSalesOrder"/>
+<End EntitySet="SalesOrders" Role="ToRole_CustomerSalesOrder"/>
+</AssociationSet>
+</EntityContainer>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="/sap/opu/odata/sap/SRA017_SALESORDER_CREATE_SRV/$metadata"/>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="/sap/opu/odata/sap/SRA017_SALESORDER_CREATE_SRV/$metadata"/>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>

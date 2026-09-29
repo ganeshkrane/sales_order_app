@@ -1,0 +1,41 @@
+[
+  {
+    "SalesOrderNumber": "0000010001",
+    "ItemNumber": "000010",
+    "MaterialNumber": "HT-1000",
+    "ProductName": "Notebook Basic 15",
+    "Quantity": "2.000",
+    "UnitofMeasure": "EA",
+    "UnitofMeasureTxt": "EA",
+    "FinalPrice": "2250.00",
+    "NetAmount": "4500.00",
+    "Currency": "ZAR",
+    "ImageFlag": false
+  },
+  {
+    "SalesOrderNumber": "0000010002",
+    "ItemNumber": "000010",
+    "MaterialNumber": "HT-1001",
+    "ProductName": "Notebook Basic 17",
+    "Quantity": "1.000",
+    "UnitofMeasure": "EA",
+    "UnitofMeasureTxt": "EA",
+    "FinalPrice": "1250.50",
+    "NetAmount": "1250.50",
+    "Currency": "ZAR",
+    "ImageFlag": false
+  },
+  {
+    "SalesOrderNumber": "0000010003",
+    "ItemNumber": "000010",
+    "MaterialNumber": "HT-1010",
+    "ProductName": "Notebook Professional 15",
+    "Quantity": "4.000",
+    "UnitofMeasure": "EA",
+    "UnitofMeasureTxt": "EA",
+    "FinalPrice": "2225.00",
+    "NetAmount": "8900.00",
+    "Currency": "EUR",
+    "ImageFlag": false
+  }
+]

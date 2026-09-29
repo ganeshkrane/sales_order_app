@@ -1,0 +1,153 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<mvc:View controllerName="cus.sd.zsalesorder.create.view.SalesOrderCartDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:sap.ui.layout.form="sap.ui.layout.form"
+    xmlns:sap.ui.layout="sap.ui.layout"
+    xmlns:sap.ui.core="sap.ui.core">
+    <Page id="SOC_CART_PAGE" title="{i18n>CART_DETAILS_TITLE}" class="sapUiFioriObjectPage">
+        <headerContent>
+            <Button text="Shopping Cart" icon="sap-icon://cart" type="Emphasized" press="onNavToCart"/>
+            <Button text="Delivery Details" icon="sap-icon://shipping-status" press="onNavToDelivery"/>
+            <Button text="Unlock Queue" icon="sap-icon://user-edit" press="onNavToQueue"/>
+        </headerContent>
+        <content>
+            <sap.ui.layout.form:SimpleForm minWidth="1024" editable="true">
+                 <sap.ui.core:Title text="{i18n>ORDER_DETAILS}" />
+                 <Label class="soc-table-label-elem-align" text="{i18n>SELECT_SALES_ORDER_LABEL}">
+                    </Label>
+                    <Select id="SOSelect" items="{SalesOrderType>/SalesOrderTypes}" change="onSOSelect" >
+                        <items>
+                            <sap.ui.core:Item key="{SalesOrderType>Salesordertype}" text="{SalesOrderType>Salesordertype} - {SalesOrderType>SODESP}"></sap.ui.core:Item>
+                        </items>
+                    </Select>
+                    <Label class="soc-table-label-elem-align" text="{i18n>Payee_LABEL}">
+                    </Label>
+                    <Select id="PayeeSelect" change="onPayeeSelect" items="{Partners>/Partners}">
+                        <items>
+                            <sap.ui.core:Item text="{Partners>Partnernumber} - {Partners>Partnername} " key="{Partners>Partnernumber}"></sap.ui.core:Item>
+                        </items>
+                    </Select>
+                    <Label class="soc-table-label-elem-align" text="{i18n>PURCHASE_ORDER}">
+                    </Label>
+                     <Input id="PUR_ORDER" value="{soc_cart>/PurchaseOrder}"
+                      maxLength="35">
+                    </Input>
+                    <Label class="soc-table-label-elem-align" text="{i18n>SHIP_TO_LABEL}">
+                    </Label>
+                    <Select id="AddressSelect" change="onAddressSelect" items="{soc_cart>/PartnerAddressSet}">
+                        <items>
+                            <sap.ui.core:Item text="{soc_cart>PartnerName}" key="{soc_cart>PartnerID}"></sap.ui.core:Item>
+                        </items>
+                    </Select>
+                    <Label text="{i18n>ADDRESS1}">
+                    </Label>
+                    <Text id="addresses1" text="{soc_cart>/Address1}" maxLines="0">
+                    </Text>
+                    <Label>
+                    </Label>
+                    <Text id="addresses2" text="{soc_cart>/Address2}" visible="false" maxLines="0">
+                    </Text>
+                    <Label text="{i18n>CITY}">
+                    </Label>
+                    <Text id="city" text="{soc_cart>/city}" maxLines="0">
+                    </Text>
+                    <Label text="{i18n>STATE}">
+                    </Label>
+                    <Text id="state" text="{soc_cart>/state}" maxLines="0">
+                    </Text>
+                    <Label text="{i18n>ZIP}">
+                    </Label>
+                    <Text id="zip" text="{soc_cart>/zip}" maxLines="0">
+                    </Text>
+                    <Label text="{i18n>COUNTRY}">
+                    </Label>
+                    <Text id="country" text="{soc_cart>/Country}" maxLines="0">
+                    </Text>
+                    <Label text="{i18n>PHONE_NUMBER}">
+                    </Label>
+                    <Text id="phoneNum" text="{soc_cart>/PhoneNumber}" maxLines="0">
+                    </Text>
+                    <Label text="{i18n>CARRIER}">
+                    </Label>
+                    <Text text="{soc_cart>/ShipToCarrier}" maxLines="0">
+                    </Text>
+                    <!-- Extension point for Simple form let you add new field in form -->
+					<sap.ui.core:ExtensionPoint name="extShippingAndPayment" />                                                              
+                    <Label text="{i18n>INCOTERMS}">
+                    </Label>
+                    <Text text="{soc_cart>/ShipToIncoTerms}" >
+                    </Text>
+                    <Label text="{i18n>SHIPPING_INSTRUCTIONS}">
+                    </Label>
+                    <TextArea id = "ship" value="{soc_cart>/ShippingInstructions}" wrapping="None"
+                     maxLength="132">
+                    </TextArea>
+                    <Label text="{i18n>NOTES_TO_RECEIVER}">
+                    </Label>
+                    <TextArea id = "notes" value="{soc_cart>/NotesToReceiver}"  wrapping="None"
+                     maxLength="132">
+                    </TextArea>
+                    <Label text="{i18n>ATTACHMENT}">
+                    </Label>
+                    <u:FileUploader id="fileUploader"
+                        name="attachmentUploader"
+                        uploadUrl=""
+                        width="100%"
+                        placeholder="Choose file..."
+                        buttonText="Browse..."
+                        icon="sap-icon://attachment"
+                        maximumFileSize="2"
+                        fileSizeExceed="onFileSizeExceed"
+                        change="onFileSelected"
+                        sameFilenameAllowed="false" />
+            </sap.ui.layout.form:SimpleForm>
+            <!-- Attachments List (displayed after attachment control and before marketing information) -->
+            <Panel id="attachmentsPanel" expandable="false" class="sapUiMediumMarginBegin sapUiMediumMarginEnd sapUiSmallMarginTop">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{i18n>ATTACHMENTS_LIST_TITLE} ({=${soc_cart>/attachments}.length || 0})" level="H5"/>
+                        <ToolbarSpacer/>
+                        <Text text="Allowed: Any file type (max 2MB per file)" class="text-xs text-gray-500 sapUiSmallMarginEnd"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <content>
+                    <List id="attachmentsList"
+                        items="{soc_cart>/attachments}"
+                        noDataText="{i18n>NO_ATTACHMENTS_ADDED}"
+                        showSeparators="All">
+                        <CustomListItem>
+                            <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMargin">
+                                <HBox alignItems="Center">
+                                    <sap.ui.core:Icon src="{=${soc_cart>isPdf} ? 'sap-icon://pdf-attachment' : 'sap-icon://document'}" 
+                                        color="{=${soc_cart>isPdf} ? '#b00' : '#0854a0'}" 
+                                        size="1.4rem" 
+                                        class="sapUiSmallMarginEnd sapUiTinyMarginTop"/>
+                                    <VBox>
+                                        <Link text="{soc_cart>fileName}" press="onAttachmentPress" design="Emphasized" wrapping="true"/>
+                                        <Text text="{soc_cart>fileSize} • {soc_cart>uploadDate}" class="sapUiTinyMarginTop text-xs text-gray-500"/>
+                                    </VBox>
+                                </HBox>
+                                <Button icon="sap-icon://delete" type="Transparent" press="onDeleteAttachment" tooltip="{i18n>DELETE_ATTACHMENT}"/>
+                            </HBox>
+                        </CustomListItem>
+                    </List>
+                </content>
+            </Panel>
+            <Title level="H5" id="Mkring_info" text="{i18n>Marketing_Information}:" class="sapUiMediumMarginBegin sapUiSmallMarginTop"/>
+            <sap.ui.core:Fragment fragmentName="cus.sd.zsalesorder.create.view.affMkt"
+						type="XML" />
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button id="btnReviewOrder" text="{i18n>REVIEW_ORDER}" type="Emphasized" press="onNavigateReview"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

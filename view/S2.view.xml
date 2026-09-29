@@ -1,0 +1,38 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns="sap.m"
+	controllerName="cus.sd.zsalesorder.create.view.S2">
+	<Page class="sapUiFioriObjectPage">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Label id="SOC_MasterListHeaderTitle" textAlign="Center"></Label>
+				</contentMiddle>
+				<contentRight>
+					<Button id="changeCustomerButton" press="changeInCustomerContext" tap="changeInCustomerContext" icon="sap-icon://customer" tooltip="Change Customer" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+			<SegmentedButton id="selectToggleOrders"
+				selectedButton="ORDERS_ID" width="100%">
+				<buttons>
+					<Button id="ORDERS_ID" press="onNavToSalesOrders" text="{i18n>ORDERS}"
+						width="40%"></Button>
+					<Button id="PRODUCTS" press="onNavToProducts" text="{i18n>PRODUCTS}"
+						width="40%"></Button>
+				</buttons>
+			</SegmentedButton>
+			<List id="list"
+				mode="{device>/listMode}"
+                select="_handleSelect"
+                growing="true"
+                growingThreshold="30"
+                growingScrollToLoad="true">
+			</List>
+		</content>
+	</Page>
+</core:View>

@@ -1,0 +1,227 @@
+<core:View xmlns="sap.m" xmlns:core="sap.ui.core"  xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout" >
+
+            <f:Form id="frmDelivery" editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout
+                        labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                        columnsXL="1" columnsL="1" columnsM="1"
+                        singleContainerFullSize="false"/>
+                </f:layout>
+
+                <f:formContainers>
+
+                    <!-- ============ 1. Delivery Information ============ -->
+                    <f:FormContainer title="Delivery Information">
+                        <f:formElements>
+
+                            <!-- Status -->
+                            <f:FormElement label="Status">
+                                <f:fields>
+                                    <Text id="txtDeliveryStatus" text="{view>/status}"/>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <!-- Customer Collection Delivery: Label, RadioButtonGroup & Address on one line -->
+                            <f:FormElement>
+                                <f:label>
+                                    <Label text="Customer Collection" required="true"/>
+                                </f:label>
+                                <f:fields>
+                                    <VBox alignItems="Stretch" width="100%">
+                                        <layoutData>
+                                            <l:GridData span="XL5 L6 M8 S12"/>
+                                        </layoutData>
+                                        <RadioButtonGroup id="rbgDeliveryType" columns="2"
+                                            selectedIndex="{view>/deliveryTypeIndex}"
+                                            select=".onDeliveryTypeChange"
+                                            class="sapUiTinyMarginBottom">
+                                            <layoutData>
+                                                <FlexItemData alignSelf="Start"/>
+                                            </layoutData>
+                                            <buttons>
+                                                <RadioButton text="Pick Up At"/>
+                                                <RadioButton text="Deliver To"/>
+                                            </buttons>
+                                        </RadioButtonGroup>
+                                        <TextArea id="inpCollectionAddress"
+                                            value="{view>/collectionAddress}"
+                                            editable="false"
+                                            rows="3"
+                                            width="100%">
+                                            <layoutData>
+                                                <FlexItemData alignSelf="Stretch"/>
+                                            </layoutData>
+                                        </TextArea>
+                                    </VBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement>
+                                <f:label>
+                                    <Label text="Delivery Block" required="true"/>
+                                </f:label>
+                                <f:fields>
+                                    <Select id="selDeliveryBlock" width="100%"
+                                        selectedKey="{view>/deliveryBlock}"
+                                        items="{view>/deliveryBlocks}"
+                                        change=".onRequiredSelectChange">
+                                        <layoutData>
+                                            <l:GridData span="XL5 L6 M8 S12"/>
+                                        </layoutData>
+                                        <core:Item key="{view>key}" text="{view>text}"/>
+                                    </Select>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <!-- <f:FormElement label="Application ID / PO Number">
+                                <f:fields>
+                                    <Input id="inpApplicationId" value="{view>/applicationId}">
+                                        <layoutData>
+                                            <l:GridData span="XL5 L6 M8 S12"/>
+                                        </layoutData>
+                                    </Input>
+                                </f:fields>
+                            </f:FormElement> -->
+
+                        </f:formElements>
+                    </f:FormContainer>
+
+                    <!-- ============ 2. License & Transaction ============ -->
+                    <f:FormContainer title="License &amp; Transaction">
+                        <f:formElements>
+
+                            <f:FormElement label="TV License Sale">
+                                <f:fields>
+                                    <Select id="selTvLicense" width="100%"
+                                        selectedKey="{view>/tvLicenseSale}"
+                                        items="{view>/tvLicenseSales}">
+                                        <layoutData>
+                                            <l:GridData span="XL5 L6 M8 S12"/>
+                                        </layoutData>
+                                        <core:Item key="{view>key}" text="{view>text}"/>
+                                    </Select>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="POS Transaction">
+                                <f:fields>
+                                    <Input id="inpPosTransaction" value="{view>/posTransaction}" editable="false">
+                                        <layoutData>
+                                            <l:GridData span="XL5 L6 M8 S12"/>
+                                        </layoutData>
+                                    </Input>
+                                </f:fields>
+                            </f:FormElement>
+
+                        </f:formElements>
+                    </f:FormContainer>
+
+                    <!-- ============ 3. Customer ============ -->
+                    <f:FormContainer title="Customer">
+                        <f:formElements>
+
+                            <!-- Customer Number & Name/Address -->
+                            <f:FormElement label="Customer Number">
+                                <f:fields>
+                                    <VBox alignItems="Stretch" width="100%">
+                                        <layoutData>
+                                            <l:GridData span="XL5 L6 M8 S12"/>
+                                        </layoutData>
+                                        <Input id="inpCustomerNumber"
+                                            editable="false"
+                                            value="{view>/customerNumber}"
+                                            width="100%"
+                                            class="sapUiTinyMarginBottom">
+                                            <layoutData>
+                                                <FlexItemData alignSelf="Stretch"/>
+                                            </layoutData>
+                                        </Input>
+                                        <TextArea id="inpCustomerName"
+                                            value="{view>/customerName}"
+                                            editable="false"
+                                            rows="3"
+                                            width="100%">
+                                            <layoutData>
+                                                <FlexItemData alignSelf="Stretch"/>
+                                            </layoutData>
+                                        </TextArea>
+                                    </VBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement>
+                                <f:label>
+                                    <Label text="Order Reason" required="true"/>
+                                </f:label>
+                                <f:fields>
+                                    <Select id="selOrderReason" width="100%"
+                                        selectedKey="{view>/orderReason}"
+                                        items="{view>/orderReasons}"
+                                        change=".onRequiredSelectChange">
+                                        <layoutData>
+                                            <l:GridData span="XL5 L6 M8 S12"/>
+                                        </layoutData>
+                                        <core:Item key="{view>key}" text="{view>text}"/>
+                                    </Select>
+                                </f:fields>
+                            </f:FormElement>
+
+                        </f:formElements>
+                    </f:FormContainer>
+
+                    <!-- ============ 4. Financial Details ============ -->
+                    <f:FormContainer title="Financial Details">
+                        <f:formElements>
+
+                            <!-- Line 1: Total Price of Order (Incl. Tax) and Requested Downpayment in 1 line -->
+                            <f:FormElement label="Total Price of Order (Incl. Tax)">
+                                <f:fields>
+                                    <HBox alignItems="Center" width="100%" wrap="Wrap">
+                                        <HBox alignItems="Center" width="140px" class="sapUiSmallMarginEnd">
+                                            <Text
+                                                id="txtTotalPrice"
+                                                text="{path:'view>/totalPrice', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2, groupingEnabled:true, groupingSeparator:'.', decimalSeparator:','}}"
+                                                class="sapUiTinyMarginEnd"/>
+                                            <Text text="{view>/currency}"/>
+                                        </HBox>
+                                        <Label text="Requested Downpayment" width="180px" showColon="true" class="sapUiTinyMarginEnd"/>
+                                        <HBox alignItems="Center">
+                                            <Text
+                                                id="txtRequestedDP"
+                                                text="{path:'view>/requestedDownpayment', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2, groupingEnabled:true, groupingSeparator:'.', decimalSeparator:','}}"
+                                                class="sapUiTinyMarginEnd"/>
+                                            <Text text="{view>/currency}"/>
+                                        </HBox>
+                                    </HBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <!-- Line 2: Received Downpayment positioned exactly below Requested Downpayment -->
+                            <f:FormElement>
+                                <f:label>
+                                    <Label text=""/>
+                                </f:label>
+                                <f:fields>
+                                    <HBox alignItems="Center" width="100%" wrap="Wrap">
+                                        <HBox width="140px" class="sapUiSmallMarginEnd"/>
+                                        <Label text="Received Downpayment" width="180px" showColon="true" class="sapUiTinyMarginEnd"/>
+                                        <HBox alignItems="Center">
+                                            <Text
+                                                id="txtReceivedDP"
+                                                text="{path:'view>/receivedDownpayment', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:2, maxFractionDigits:2, groupingEnabled:true, groupingSeparator:'.', decimalSeparator:','}}"
+                                                class="sapUiTinyMarginEnd"/>
+                                            <Text text="{view>/currency}"/>
+                                        </HBox>
+                                    </HBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                        </f:formElements>
+                    </f:FormContainer>
+
+                </f:formContainers>
+            </f:Form>    
+</core:View>

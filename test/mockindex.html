@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Mockserver View - Create Sales Orders (F0018)</title>
+
+    <!-- 1. Fetching framework streams -->
+    <script id="sap-ui-bootstrap"
+        src="https://ui5.sap.com/1.71.85/resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_fiori_3"
+        data-sap-ui-libs="sap.m, sap.ca.scfld.md, sap.ca.ui"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-resourceroots='{"cus.sd.zsalesorder.create": "../"}'
+        data-sap-ui-frameOptions="allow"
+        data-sap-ui-xx-bindingSyntax="complex">
+    </script>
+
+    <!-- 2. Core Mockserver Setup and Application Bootstrap -->
+    <script>
+        window.onload = function() {
+            if (typeof sap !== "undefined") {
+                sap.ui.getCore().attachInit(function () {
+                    
+                    // Load the legacy MockServer library and ComponentContainer together
+                    sap.ui.require([
+                        "sap/ui/core/util/MockServer",
+                        "sap/ui/core/ComponentContainer"
+                    ], function (MockServer, ComponentContainer) {
+                        
+                        try {
+                            // Initialize the core mock server mechanism
+                            var oMockServer = new MockServer({
+                                rootUri: "/sap/opu/odata/sap/ZSRA017_SALESORDER_CREATE_SRV/"
+                            });
+
+                            // Configure the path to find your metadata.xml and json mock datasets
+                            oMockServer.simulate("../localService/metadata.xml", {
+                                sMockdataBaseUrl: "../localService/mockdata/",
+                                bGenerateMissingMockData: true // Automatically invents mock records if JSONs are missing
+                            });
+
+                            // Spin up the interceptor engine
+                            oMockServer.start();
+                            console.log("Legacy UI5 Mock Server successfully intercepted network traffic.");
+
+                        } catch (err) {
+                            console.error("Failed to initialize MockServer framework:", err);
+                        }
+
+                        // Bootstrapping the app component cleanly over the mocked environment
+                        new ComponentContainer({
+                            name: "cus.sd.zsalesorder.create",
+                            manifest: false,
+                            settings: {
+                                id: "cus.sd.zsalesorder.create"
+                            },
+                            height: "100%",
+                            width: "100%"
+                        }).placeAt("content");
+
+                    });
+                });
+            } else {
+                console.error("SAPUI5 Framework failed to stream from CDN repository.");
+            }
+        };
+    </script>
+</head>
+<body class="sapUiBody" id="content">
+</body>
+</html>

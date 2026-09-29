@@ -1,0 +1,11 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<ObjectListItem xmlns="sap.m"  type="{device>/listItemType}" press="_handleItemPress" 
+	 title="{ProductDesc}">
+    <attributes>
+        <ObjectAttribute text="{ProductID}" active="false"></ObjectAttribute>
+    </attributes>
+</ObjectListItem>

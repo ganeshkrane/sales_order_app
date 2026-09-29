@@ -1,0 +1,51 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns:sap.ui.core.mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="cus.sd.zsalesorder.create.view.S3">
+
+	<Page id="SalesOrderDetail" title="{i18n>ORDER_DETAIL}" class="sapUiFioriObjectPage">
+		 <headerContent>
+            <Button id="CART_BUTTON" icon="{img>/cartIcon}" tap="_goToCart" text="{soc_cart>/itemCount}" />
+        </headerContent>
+
+		<content>
+			<ObjectHeader xmlns="sap.m" xmlns:sap.ui.core="sap.ui.core" id="SO_ObjectHeader"
+				title="{parts:[{path:'i18n>SO'},{path:'SalesOrderNumber'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.getTextPar'}"
+				number="{path : 'TotalAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}"
+				numberUnit="{Currency}" introActive="false" titleActive="false" iconActive="false">
+
+				<attributes>
+						<ObjectAttribute text="{path:'LocalDetails>/CustomerName', formatter:'cus.sd.zsalesorder.create.util.Formatter.formatSOTo'}"  active="false"></ObjectAttribute>
+			 			<ObjectAttribute
+			 				text="{parts:[{path:'LocalDetails>/FormattedAddress2'},{path:'LocalDetails>/FormattedAddress3'},{path:'LocalDetails>/FormattedAddress4'},{path:'LocalDetails>/FormattedAddress5'},{path:'LocalDetails>/FormattedAddress6'},{path:'LocalDetails>/FormattedAddress7'},{path:'LocalDetails>/FormattedAddress8'},{path:'LocalDetails>/FormattedAddress9'}], formatter:'cus.sd.zsalesorder.create.util.Formatter.formatAddress'}"
+			 				id="address" active="false"></ObjectAttribute>
+			 				<!-- Extension point for Sales Order Details page let you add new field in sales order detail page -->
+						<sap.ui.core:ExtensionPoint name="extSalesOrderDetail" />
+				</attributes>
+
+				<statuses>
+						<ObjectStatus text="{path: 'OrderDate', type:'sap.ca.ui.model.type.Date', formatOptions:{source:{pattern:'yyyyMMdd'},style:'medium'}, formatter:'cus.sd.zsalesorder.create.util.Formatter.formatOrderDate'}">
+						</ObjectStatus>
+						<ObjectStatus id="requested"
+							text="{path: 'RequestedDate', type:'sap.ca.ui.model.type.Date', formatOptions:{source:{pattern:'yyyyMMdd'},style:'medium'}, formatter:'cus.sd.zsalesorder.create.util.Formatter.formatRequestDate'}">
+						</ObjectStatus>
+				</statuses>
+			</ObjectHeader>
+			
+			<sap.ui.core.mvc:XMLView id="soItemDetail" viewName="cus.sd.zsalesorder.create.view.SOItemDetail"></sap.ui.core.mvc:XMLView>
+        </content>
+
+        <footer id="footer">
+            <Bar>
+                <contentRight>
+                    <Button id="SO_AddToCart" tap="_addProductToCart" text="{i18n>ADD_TO_CART}" type="Emphasized"></Button>
+                    <Button id="SO_QuickCheckout" tap="_quickCheckout" text="{i18n>CHECKOUT}"></Button>
+                </contentRight>
+            </Bar>
+        </footer>
+
+	</Page>
+</core:View>
